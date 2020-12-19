@@ -47,6 +47,7 @@ public class Main extends JavaPlugin {
 		announcer = new Announcer();
 		
 		commandHandler.registerCommands();
+		eventHandler.registerEvents();
 	}
 
 	public static Main getInstance() {
