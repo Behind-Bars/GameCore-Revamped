@@ -8,29 +8,46 @@ package org.behindbars.gamecore.core.handlers;
 
 import java.lang.reflect.Field;
 
+import org.behindbars.gamecore.core.commands.BailCMD;
+import org.behindbars.gamecore.core.commands.BanCMD;
 import org.behindbars.gamecore.core.commands.BountyCMD;
 import org.behindbars.gamecore.core.commands.BroadcastCMD;
+import org.behindbars.gamecore.core.commands.BuyCMD;
 import org.behindbars.gamecore.core.commands.ClearChatCMD;
 import org.behindbars.gamecore.core.commands.ClearLagCMD;
+import org.behindbars.gamecore.core.commands.ContrabandCMD;
 import org.behindbars.gamecore.core.commands.DisposeCMD;
+import org.behindbars.gamecore.core.commands.DonationAdminCMD;
+import org.behindbars.gamecore.core.commands.DonationCMD;
 import org.behindbars.gamecore.core.commands.DonationPointCMD;
 import org.behindbars.gamecore.core.commands.FilterCMD;
 import org.behindbars.gamecore.core.commands.FlyCMD;
 import org.behindbars.gamecore.core.commands.GamemodeCMD;
 import org.behindbars.gamecore.core.commands.HelpCMD;
 import org.behindbars.gamecore.core.commands.HomeCMD;
+import org.behindbars.gamecore.core.commands.JailCMD;
+import org.behindbars.gamecore.core.commands.KickCMD;
 import org.behindbars.gamecore.core.commands.KitCMD;
 import org.behindbars.gamecore.core.commands.ListCMD;
+import org.behindbars.gamecore.core.commands.MuteCMD;
 import org.behindbars.gamecore.core.commands.PayCMD;
 import org.behindbars.gamecore.core.commands.PlayerHeadCMD;
 import org.behindbars.gamecore.core.commands.PrivateMessageCM;
 import org.behindbars.gamecore.core.commands.ReferCMD;
 import org.behindbars.gamecore.core.commands.RenameCMD;
 import org.behindbars.gamecore.core.commands.ReplyCMD;
+import org.behindbars.gamecore.core.commands.RulesCMD;
+import org.behindbars.gamecore.core.commands.ScoreboardToggle;
 import org.behindbars.gamecore.core.commands.SetupMapCMD;
 import org.behindbars.gamecore.core.commands.SpeedCMD;
+import org.behindbars.gamecore.core.commands.StatsCMD;
+import org.behindbars.gamecore.core.commands.SuicideCMD;
 import org.behindbars.gamecore.core.commands.TeleportCMD;
+import org.behindbars.gamecore.core.commands.TempbanCMD;
+import org.behindbars.gamecore.core.commands.UnbanCMD;
+import org.behindbars.gamecore.core.commands.UnjailCMD;
 import org.behindbars.gamecore.core.commands.VanishCMD;
+import org.behindbars.gamecore.core.commands.WarnCMD;
 import org.behindbars.gamecore.core.commands.WorldCMD;
 import org.behindbars.gamecore.core.commands.ranks.RankCMD;
 import org.behindbars.gamecore.core.commands.ranks.RankupCMD;
@@ -80,7 +97,8 @@ public class CommandHandler {
 				new DisposeCMD(), new DonationPointCMD(), new FlyCMD(), new GamemodeCMD(), new PlayerHeadCMD(), new RankCMD(), new RankupCMD(), new RenameCMD(),
 				new SetupMapCMD(), new SpeedCMD(), new TeleportCMD(), new TokenCMD(), new TokenShopCMD(), new TokenEconomyCMD(), new VanishCMD(), new WorldCMD(),
 				new HomeCMD(), new BountyCMD(), new FilterCMD(), new HelpCMD(), new KitCMD(), new ListCMD(), new PayCMD(), new PrivateMessageCM(), new ReplyCMD(),
-				new ReferCMD());
+				new ReferCMD(), new RulesCMD(), new ScoreboardToggle(), new StatsCMD(), new SuicideCMD(), new ContrabandCMD(), new JailCMD(), new UnjailCMD(), new BailCMD(),
+				new MuteCMD(), new BanCMD(), new UnbanCMD(), new TempbanCMD(), new KickCMD(), new WarnCMD(), new DonationCMD(), new BuyCMD(), new DonationAdminCMD());
 	}
 
 	private void registerCommand(Command... commands) {
