@@ -29,7 +29,7 @@ public class PlaceBlock implements Listener {
 		}
 
 		String blockName = event.getBlock().getType().toString();
-		boolean isRedstone = redstoneLimit.getRestrictedBlocks().contains(blockName);
+	/*	boolean isRedstone = redstoneLimit.getRestrictedBlocks().contains(blockName);
 
 		if (!isRedstone || !redstoneLimit.restrict()) {
 			event.setCancelled(false);
@@ -69,7 +69,7 @@ public class PlaceBlock implements Listener {
 			}
 
 			event.setCancelled(false);
-		}
+		}*/
 
 		Main.getPlayerHandler(player).setBlocksPlaced(Main.getPlayerHandler(player).getBlocksPlaced() + 1);
 
