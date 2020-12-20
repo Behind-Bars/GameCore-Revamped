@@ -17,6 +17,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 
+import net.md_5.bungee.api.ChatColor;
+
 public class PlaceBlock implements Listener {
 	
 	@EventHandler
@@ -29,7 +31,7 @@ public class PlaceBlock implements Listener {
 		}
 
 		String blockName = event.getBlock().getType().toString();
-	/*	boolean isRedstone = redstoneLimit.getRestrictedBlocks().contains(blockName);
+		boolean isRedstone = redstoneLimit.getRestrictedBlocks().contains(blockName);
 
 		if (!isRedstone || !redstoneLimit.restrict()) {
 			event.setCancelled(false);
@@ -58,18 +60,18 @@ public class PlaceBlock implements Listener {
 
 			if (count == (redstoneLimit.getRedstoneLimit() + 1) || (count > redstoneLimit.getRedstoneLimit() + 1)) {
 				if (redstoneLimit.getPlayerBypass(event.getPlayer().getUniqueId())) {
-					event.getPlayer().sendMessage(Utils.colour("&3This chunk exceeds maximum redstone, but you bypassed!"));
+					event.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', "&3This chunk exceeds maximum redstone, but you bypassed!"));
 					event.setCancelled(false);
 					return;
 				}
 
-				event.getPlayer().sendMessage(Utils.colour("&cThis chunk exceeds maximum redstone!"));
+				event.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', "&cThis chunk exceeds maximum redstone!"));
 				event.setCancelled(true);
 				return;
 			}
 
 			event.setCancelled(false);
-		}*/
+		}
 
 		Main.getPlayerHandler(player).setBlocksPlaced(Main.getPlayerHandler(player).getBlocksPlaced() + 1);
 

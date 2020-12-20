@@ -14,7 +14,10 @@ import org.behindbars.gamecore.core.automation.Announcer;
 import org.behindbars.gamecore.core.handlers.ColorHandler;
 import org.behindbars.gamecore.core.handlers.CommandHandler;
 import org.behindbars.gamecore.core.handlers.EventHandler;
+import org.behindbars.gamecore.core.handlers.InfoHandler;
+import org.behindbars.gamecore.core.handlers.MineHandler;
 import org.behindbars.gamecore.core.handlers.PlayerHandler;
+import org.behindbars.gamecore.core.handlers.WarpHandler;
 import org.behindbars.gamecore.core.util.TimeFormatHandler;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -30,6 +33,9 @@ public class Main extends JavaPlugin {
 	private static EventHandler eventHandler;
 	private static ColorHandler colorHandler;
 	private static TimeFormatHandler timeformatHandler;
+	private static MineHandler mineHandler;
+	private static WarpHandler warpHandler;
+	private static InfoHandler infoHandler;
 	
 	private static XenoAPI api;
 	
@@ -45,6 +51,9 @@ public class Main extends JavaPlugin {
 		colorHandler = new ColorHandler();
 		timeformatHandler =  new TimeFormatHandler();
 		announcer = new Announcer();
+		mineHandler = new MineHandler();
+		warpHandler = new WarpHandler();
+		infoHandler = new InfoHandler();
 		
 		commandHandler.registerCommands();
 		eventHandler.registerEvents();
@@ -83,6 +92,18 @@ public class Main extends JavaPlugin {
 
 	public static TimeFormatHandler getTimeformatHandler() {
 		return timeformatHandler;
+	}
+
+	public static MineHandler getMineHandler() {
+		return mineHandler;
+	}
+
+	public static WarpHandler getWarpHandler() {
+		return warpHandler;
+	}
+
+	public static InfoHandler getInfoHandler() {
+		return infoHandler;
 	}
 
 }
