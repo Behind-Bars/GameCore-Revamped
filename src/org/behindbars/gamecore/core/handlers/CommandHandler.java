@@ -47,7 +47,10 @@ import org.behindbars.gamecore.core.commands.TempbanCMD;
 import org.behindbars.gamecore.core.commands.UnbanCMD;
 import org.behindbars.gamecore.core.commands.UnjailCMD;
 import org.behindbars.gamecore.core.commands.VanishCMD;
+import org.behindbars.gamecore.core.commands.VoteAdminCMD;
+import org.behindbars.gamecore.core.commands.VoteCMD;
 import org.behindbars.gamecore.core.commands.WarnCMD;
+import org.behindbars.gamecore.core.commands.WarpCMD;
 import org.behindbars.gamecore.core.commands.WorldCMD;
 import org.behindbars.gamecore.core.commands.ranks.RankCMD;
 import org.behindbars.gamecore.core.commands.ranks.RankupCMD;
@@ -66,6 +69,7 @@ import org.behindbars.gamecore.donation.commands.SellCMD;
 import org.behindbars.gamecore.donation.commands.SpawnCMD;
 import org.behindbars.gamecore.economy.commands.EconomyCMD;
 import org.behindbars.gamecore.economy.commands.MoneyCMD;
+import org.behindbars.gamecore.killstreak.KillstreakCMD;
 import org.behindbars.gamecore.pets.commands.PetCMD;
 import org.behindbars.gamecore.trails.commands.TrailsCMD;
 import org.bukkit.Bukkit;
@@ -98,7 +102,8 @@ public class CommandHandler {
 				new SetupMapCMD(), new SpeedCMD(), new TeleportCMD(), new TokenCMD(), new TokenShopCMD(), new TokenEconomyCMD(), new VanishCMD(), new WorldCMD(),
 				new HomeCMD(), new BountyCMD(), new FilterCMD(), new HelpCMD(), new KitCMD(), new ListCMD(), new PayCMD(), new PrivateMessageCM(), new ReplyCMD(),
 				new ReferCMD(), new RulesCMD(), new ScoreboardToggle(), new StatsCMD(), new SuicideCMD(), new ContrabandCMD(), new JailCMD(), new UnjailCMD(), new BailCMD(),
-				new MuteCMD(), new BanCMD(), new UnbanCMD(), new TempbanCMD(), new KickCMD(), new WarnCMD(), new DonationCMD(), new BuyCMD(), new DonationAdminCMD());
+				new MuteCMD(), new BanCMD(), new UnbanCMD(), new TempbanCMD(), new KickCMD(), new WarnCMD(), new DonationCMD(), new BuyCMD(), new DonationAdminCMD(),
+				new KillstreakCMD(), new WarpCMD(), new VoteCMD(), new VoteAdminCMD());
 	}
 
 	private void registerCommand(Command... commands) {

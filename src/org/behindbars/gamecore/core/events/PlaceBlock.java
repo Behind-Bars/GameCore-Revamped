@@ -2,11 +2,12 @@
 Author: XenoPyax
 Github: https://github.com/XenoPyax
 Discord: XenoPyax#5647
-*/
+ */
 
 package org.behindbars.gamecore.core.events;
 
 import org.behindbars.gamecore.Main;
+import org.behindbars.gamecore.core.util.RedstoneLimit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -20,7 +21,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import net.md_5.bungee.api.ChatColor;
 
 public class PlaceBlock implements Listener {
-	
+
 	@EventHandler
 	public void onPlaceBlock(BlockPlaceEvent event) {
 		Player player = event.getPlayer();
@@ -31,9 +32,9 @@ public class PlaceBlock implements Listener {
 		}
 
 		String blockName = event.getBlock().getType().toString();
-		boolean isRedstone = redstoneLimit.getRestrictedBlocks().contains(blockName);
+		boolean isRedstone = Main.getRedstoneLimit().getRestrictedBlocks().contains(blockName);
 
-		if (!isRedstone || !redstoneLimit.restrict()) {
+		if (!isRedstone || !Main.getRedstoneLimit().restrict()) {
 			event.setCancelled(false);
 			return;
 		}
@@ -49,17 +50,16 @@ public class PlaceBlock implements Listener {
 			for (int y = 0; y <= maxY; ++y) {
 				for (int z = minZ; z <= maxZ; ++z) {
 					blockName = event.getBlock().getChunk().getBlock(x, y, z).getType().toString();
-					isRedstone = redstoneLimit.getRestrictedBlocks().contains(blockName);
+					isRedstone = Main.getRedstoneLimit().getRestrictedBlocks().contains(blockName);
 
 					if (isRedstone) {
 						count++;
-
 					}
 				}
 			}
 
-			if (count == (redstoneLimit.getRedstoneLimit() + 1) || (count > redstoneLimit.getRedstoneLimit() + 1)) {
-				if (redstoneLimit.getPlayerBypass(event.getPlayer().getUniqueId())) {
+			if (count == (Main.getRedstoneLimit().getRedstoneLimit() + 1) || (count > Main.getRedstoneLimit().getRedstoneLimit() + 1)) {
+				if (Main.getRedstoneLimit().getPlayerBypass(event.getPlayer().getUniqueId())) {
 					event.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', "&3This chunk exceeds maximum redstone, but you bypassed!"));
 					event.setCancelled(false);
 					return;

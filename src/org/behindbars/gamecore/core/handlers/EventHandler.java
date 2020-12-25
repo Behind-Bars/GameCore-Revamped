@@ -12,9 +12,11 @@ import org.behindbars.gamecore.core.events.CraftItem;
 import org.behindbars.gamecore.core.events.EntityAttackEntity;
 import org.behindbars.gamecore.core.events.EntityDeath;
 import org.behindbars.gamecore.core.events.InventoryClick;
+import org.behindbars.gamecore.core.events.PickupItem;
 import org.behindbars.gamecore.core.events.PlaceBlock;
 import org.behindbars.gamecore.core.events.PlayerBlockPhysics;
 import org.behindbars.gamecore.core.events.PlayerChats;
+import org.behindbars.gamecore.core.events.PlayerInteractEntity;
 import org.behindbars.gamecore.core.events.PlayerInteractSignChange;
 import org.behindbars.gamecore.core.events.PlayerJoin;
 import org.behindbars.gamecore.core.events.PlayerLeave;
@@ -40,6 +42,6 @@ public class EventHandler {
 
 	public void registerEvents() {
 		registerEvent(new BlockBreak(), new CraftItem(), new PlayerBlockPhysics(), new PlayerJoin(), new PlayerLeave(), new PlaceBlock(), new PlayerChats(), new PlayerRespawn(), new EntityAttackEntity(),
-				new EntityDeath(), new PlayerInteractSignChange(), new InventoryClick(), new PlayerMove());
+				new EntityDeath(), new PlayerInteractSignChange(), new InventoryClick(), new PlayerMove(), new PickupItem(), new PlayerInteractEntity());
 	}
 }

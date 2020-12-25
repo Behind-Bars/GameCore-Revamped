@@ -18,6 +18,7 @@ import org.behindbars.gamecore.core.handlers.InfoHandler;
 import org.behindbars.gamecore.core.handlers.MineHandler;
 import org.behindbars.gamecore.core.handlers.PlayerHandler;
 import org.behindbars.gamecore.core.handlers.WarpHandler;
+import org.behindbars.gamecore.core.util.RedstoneLimit;
 import org.behindbars.gamecore.core.util.TimeFormatHandler;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -36,6 +37,7 @@ public class Main extends JavaPlugin {
 	private static MineHandler mineHandler;
 	private static WarpHandler warpHandler;
 	private static InfoHandler infoHandler;
+	private static RedstoneLimit redstoneLimit;
 	
 	private static XenoAPI api;
 	
@@ -54,6 +56,7 @@ public class Main extends JavaPlugin {
 		mineHandler = new MineHandler();
 		warpHandler = new WarpHandler();
 		infoHandler = new InfoHandler();
+		redstoneLimit = new RedstoneLimit();
 		
 		commandHandler.registerCommands();
 		eventHandler.registerEvents();
@@ -104,6 +107,10 @@ public class Main extends JavaPlugin {
 
 	public static InfoHandler getInfoHandler() {
 		return infoHandler;
+	}
+
+	public static RedstoneLimit getRedstoneLimit() {
+		return redstoneLimit;
 	}
 
 }
