@@ -38,25 +38,25 @@ public class EconomyCMD extends Command {
         }else if(args.length != 4) {
             player.sendMessage(Main.getColorHandler().usage + args[0] + " add/remove <player> <amount>");
         }else {
-	        Player target = Bukkit.getPlayerExact(args[2]);
+	        Player target = Bukkit.getPlayerExact(args[1]);
 	        if(target == null) {
 	            player.sendMessage(Main.getColorHandler().offlinePlayer + "This player is offline!");
 	        }else {
 		        try {
-		            int num = Integer.parseInt(args[3]);
+		            int num = Integer.parseInt(args[2]);
 		            
-		            if(args[1].equalsIgnoreCase("add")) {
-			            player.sendMessage(Main.getColorHandler().main + "Balance: " + Main.getColorHandler().message + "Added $" + String.valueOf(args[3]) + " to " + target.getName());
-			            Main.getPlayerHandler(target).addMoney(Integer.parseInt(args[3]));
-			        }else if(args[1].equalsIgnoreCase("remove")) {
+		            if(args[0].equalsIgnoreCase("add")) {
+			            player.sendMessage(Main.getColorHandler().main + "Balance: " + Main.getColorHandler().message + "Added $" + String.valueOf(args[2]) + " to " + target.getName());
+			            Main.getPlayerHandler(target).addMoney(Integer.parseInt(args[2]));
+			        }else if(args[0].equalsIgnoreCase("remove")) {
 			            if(num > Main.getPlayerHandler(target).getMoney()) {
 			                player.sendMessage(Main.getColorHandler().main + "Balance: " + Main.getColorHandler().message + target.getName() 
 			                	+ " does not have that much money to remove!");
 			            }else {	
 			            	player.sendMessage(Main.getColorHandler().main + "Balance: " + Main.getColorHandler().message 
-			            			+ "Removed $" + String.valueOf(args[3]) + " to " + target.getName());
+			            			+ "Removed $" + String.valueOf(args[2]) + " to " + target.getName());
 			            	
-			            	Main.getPlayerHandler(target).removeMoney( Integer.parseInt(args[3]));
+			            	Main.getPlayerHandler(target).removeMoney(Integer.parseInt(args[2]));
 			            }
 			        }
 		        } catch (NumberFormatException ex){

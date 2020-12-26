@@ -67,7 +67,6 @@ public class PlayerChats implements Listener {
 			event.setFormat(Main.getPlayerHandler(player).rankToString() + Main.getPlayerHandler(player).getNickname() + ChatColor.GRAY + ": " + message);
 			return;
 		}
-
 		event.setFormat(Main.getPlayerHandler(player).rankToString() + Main.getPlayerHandler(player).getNickname() + ChatColor.GRAY + ": " + event.getMessage().replaceFirst("%", "%%"));
 		return;
 	}

@@ -8,6 +8,7 @@ package org.behindbars.gamecore.core.handlers;
 
 import java.lang.reflect.Field;
 
+import org.behindbars.gamecore.Main;
 import org.behindbars.gamecore.core.commands.BailCMD;
 import org.behindbars.gamecore.core.commands.BanCMD;
 import org.behindbars.gamecore.core.commands.BountyCMD;
@@ -83,6 +84,7 @@ public class CommandHandler {
 	public CommandHandler() {
 		setupCommandMap();
 		registerCommands();
+		regiserOverrideCommands();
 	}
 	
 	private void setupCommandMap() {  
@@ -95,17 +97,23 @@ public class CommandHandler {
         }
 	}
 	
-	public void registerCommands() {
+	private void registerCommands() {
 		registerCommand(new BroadcastCMD(), new CraftCMD(), new DiscoArmorCMD(), new EventCMD(), new FeedCMD(), new HatCMD(), new MoneyCMD(), new EconomyCMD(),
 				new NamecolorCDM(), new NicknameCMD(), new PetCMD(), new PvPCMD(), new SellCMD(), new SpawnCMD(), new TrailsCMD(), new ClearChatCMD(), new ClearLagCMD(),
-				new DisposeCMD(), new DonationPointCMD(), new FlyCMD(), new GamemodeCMD(), new PlayerHeadCMD(), new RankCMD(), new RankupCMD(), new RenameCMD(),
+				new DisposeCMD(), new DonationPointCMD(), new FlyCMD(), new PlayerHeadCMD(), new RankCMD(), new RankupCMD(), new RenameCMD(),
 				new SetupMapCMD(), new SpeedCMD(), new TeleportCMD(), new TokenCMD(), new TokenShopCMD(), new TokenEconomyCMD(), new VanishCMD(), new WorldCMD(),
 				new HomeCMD(), new BountyCMD(), new FilterCMD(), new HelpCMD(), new KitCMD(), new ListCMD(), new PayCMD(), new PrivateMessageCM(), new ReplyCMD(),
 				new ReferCMD(), new RulesCMD(), new ScoreboardToggle(), new StatsCMD(), new SuicideCMD(), new ContrabandCMD(), new JailCMD(), new UnjailCMD(), new BailCMD(),
 				new MuteCMD(), new BanCMD(), new UnbanCMD(), new TempbanCMD(), new KickCMD(), new WarnCMD(), new DonationCMD(), new BuyCMD(), new DonationAdminCMD(),
-				new KillstreakCMD(), new WarpCMD(), new VoteCMD(), new VoteAdminCMD());
+				new KillstreakCMD(), new WarpCMD(), new VoteCMD(), new VoteAdminCMD(), new KillstreakCMD(), new SellCMD(), new SpawnCMD(), new AdminCMD());
 	}
-
+	
+	private void regiserOverrideCommands() {
+		GamemodeCMD gmcmd = new GamemodeCMD();
+		Main.getInstance().getCommand("gamemode").setExecutor(gmcmd);
+		Main.getInstance().getCommand("gamemode").setTabCompleter(gmcmd);
+	}
+	
 	private void registerCommand(Command... commands) {
 		for(Command command : commands) {
 			cmdMap.register(command.getName(), command);

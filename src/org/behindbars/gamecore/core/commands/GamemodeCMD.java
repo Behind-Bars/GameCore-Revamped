@@ -15,50 +15,42 @@ import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 
-public class GamemodeCMD extends Command {
-
-	private static String name = "gamemode";
-	private static String description = "";
-	private static String usageMessage = "";
-	private static List<String> aliases = Arrays.asList("gm");
-
-	public GamemodeCMD() {
-		super(name, description, usageMessage, aliases);
-	}
+public class GamemodeCMD implements TabExecutor {
 
 	@Override
-	public boolean execute(CommandSender sender, String commandLabel, String[] args) {
+	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		if (sender instanceof ConsoleCommandSender)	return true;
 		Player player = (Player) sender;
 
 		if(Main.getPlayerHandler(player).getRank() < 10) {
 			player.sendMessage(Main.getColorHandler().noPermission);
-		}else if(!(args.length == 2)) {
-			player.sendMessage(Main.getColorHandler().usage + args[0] + " <gamemode>");
+		}else if(!(args.length == 1)) {
+			player.sendMessage(Main.getColorHandler().usage + "/gamemode <gamemode>");
 		}else if(Main.getPlayerHandler(player).getDonateDiscoArmorStatus() == 1) {
 			player.sendMessage(Main.getColorHandler().error + "You can not preform this command in disco armor!");
-		}else if(args[1].equalsIgnoreCase("creative")
-				|| args[1].equalsIgnoreCase("c")
-				|| args[1].equalsIgnoreCase("1")) {
+		}else if(args[0].equalsIgnoreCase("creative")
+				|| args[0].equalsIgnoreCase("c")
+				|| args[0].equalsIgnoreCase("1")) {
 			player.setGameMode(GameMode.CREATIVE);
-			player.sendMessage(Main.getColorHandler().main + "Gamemode: " +Main.getColorHandler().message + "You have updated your gamemode to " + args[1] + "!");
-		} else if(args[1].equalsIgnoreCase("survival")
-				|| args[1].equalsIgnoreCase("s")
-				|| args[1].equalsIgnoreCase("0")) {
+			player.sendMessage(Main.getColorHandler().main + "Gamemode: " +Main.getColorHandler().message + "You have updated your gamemode to " + args[0] + "!");
+		} else if(args[0].equalsIgnoreCase("survival")
+				|| args[0].equalsIgnoreCase("s")
+				|| args[0].equalsIgnoreCase("0")) {
 			player.setGameMode(GameMode.SURVIVAL);
-			player.sendMessage(Main.getColorHandler().main + "Gamemode: "+Main.getColorHandler().message + "You have updated your gamemode to " + args[1] + "!");
-		}else if(args[1].equalsIgnoreCase("adventure")
-				|| args[1].equalsIgnoreCase("a")
-				|| args[1].equalsIgnoreCase("2")) {
+			player.sendMessage(Main.getColorHandler().main + "Gamemode: "+Main.getColorHandler().message + "You have updated your gamemode to " + args[0] + "!");
+		}else if(args[0].equalsIgnoreCase("adventure")
+				|| args[0].equalsIgnoreCase("a")
+				|| args[0].equalsIgnoreCase("2")) {
 			player.setGameMode(GameMode.ADVENTURE);
-			player.sendMessage(Main.getColorHandler().main + "Gamemode: " +Main.getColorHandler().message+ "You have updated your gamemode to " + args[1] + "!");
-		} else if(args[1].equalsIgnoreCase("spectator")
-				|| args[1].equalsIgnoreCase("spec")
-				|| args[1].equalsIgnoreCase("3")) {
+			player.sendMessage(Main.getColorHandler().main + "Gamemode: " +Main.getColorHandler().message+ "You have updated your gamemode to " + args[0] + "!");
+		} else if(args[0].equalsIgnoreCase("spectator")
+				|| args[0].equalsIgnoreCase("spec")
+				|| args[0].equalsIgnoreCase("3")) {
 			player.setGameMode(GameMode.SPECTATOR);
-			player.sendMessage(Main.getColorHandler().main + "Gamemode: "+Main.getColorHandler().message + "You have updated your gamemode to " + args[1] + "!");
+			player.sendMessage(Main.getColorHandler().main + "Gamemode: "+Main.getColorHandler().message + "You have updated your gamemode to " + args[0] + "!");
 		} else {
 			player.sendMessage(Main.getColorHandler().error + "Invalid Gamemode!");
 		}
@@ -66,7 +58,7 @@ public class GamemodeCMD extends Command {
 	}
 
 	@Override
-	public List<String> tabComplete(CommandSender sender, String alias, String[] args) {
+	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
 		List<String> list = new ArrayList<>();
 		list.addAll(Arrays.asList("creative", "survival", "spectator", "adventure"));
 		return list;

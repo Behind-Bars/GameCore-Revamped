@@ -20,7 +20,7 @@ import org.bukkit.entity.Player;
 
 public class TrailsCMD extends Command {
 
-	private static String name = "";
+	private static String name = "trails";
 	private static String description = "";
 	private static String usageMessage = "";
 	private static List<String> aliases = Arrays.asList("");

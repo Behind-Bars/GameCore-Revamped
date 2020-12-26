@@ -42,31 +42,31 @@ public class NicknameCMD extends Command {
 		if(Main.getPlayerHandler(player).getDonateNickname() == 0) {
 			player.sendMessage(Main.getColorHandler().noPermission);
 		}else if(args.length == 1) {
-			player.sendMessage(Main.getColorHandler().usage + args[0] + " <name>");
-		}else if(args[1].contains("&k") || args[1].contains("&l") || args[1].contains("&m") || args[1].contains("&n") || args[1].contains("&o") || args[1].contains("&4")
-				|| args[1].contains("&0")) {
+			player.sendMessage(Main.getColorHandler().usage + "/nickname <name>");
+		}else if(args[0].contains("&k") || args[0].contains("&l") || args[0].contains("&m") || args[0].contains("&n") || args[0].contains("&o") || args[0].contains("&4")
+				|| args[0].contains("&0")) {
 			player.sendMessage(Main.getColorHandler().donation + "You can not use special characters, dark red, or black in your nickname!");
-		}else if(args[1].contains("#")) {
+		}else if(args[0].contains("#")) {
 			if(Main.getPlayerHandler(player).getRank() < 10) 
 				player.sendMessage(Main.getColorHandler().donation + "You may not use Hex Codes!");
-		}else if(Main.getPlayerHandler(player).getRank() < 10 && !ChatColor.stripColor(args[1].replaceAll("&","§")).equalsIgnoreCase(player.getName())) {
+		}else if(Main.getPlayerHandler(player).getRank() < 10 && !ChatColor.stripColor(args[0].replaceAll("&","§")).equalsIgnoreCase(player.getName())) {
 			player.sendMessage(Main.getColorHandler().donation + "You can use colors, but your name must remain the same!");
 		}else {
-			Main.getPlayerHandler(player).setNickname(format(args[1]));
+			Main.getPlayerHandler(player).setNickname(format(args[0]));
 	
 			player.setCustomName(Main.getPlayerHandler(player).rankToString() + Main.getPlayerHandler(player).getNickname());
 			player.setPlayerListName(Main.getPlayerHandler(player).rankToString() + Main.getPlayerHandler(player).getNickname());
-			player.sendMessage(Main.getColorHandler().donation + "You changed your nickname to " + args[1].replaceAll("&","§"));
+			player.sendMessage(Main.getColorHandler().donation + "You changed your nickname to " + args[0].replaceAll("&","§"));
 	
 			if(args[0].equalsIgnoreCase("/nickrgb")) {
-				setRGBNick(player, args[1], args[2]);
+				setRGBNick(player, args[0], args[1]);
 			}
 		}
 		return true;
 	}
 
 	private String format(String msg) {
-		if(Bukkit.getVersion().contains("1.16")) {
+		if(Bukkit.getVersion().contains("0.16")) {
 
 			Matcher match = pattern.matcher(msg);
 			while (match.find()) {

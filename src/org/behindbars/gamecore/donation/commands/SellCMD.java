@@ -19,7 +19,7 @@ import org.bukkit.entity.Player;
 
 public class SellCMD extends Command {
 
-	private static String name = "";
+	private static String name = "sell";
 	private static String description = "";
 	private static String usageMessage = "";
 	private static List<String> aliases = Arrays.asList("");

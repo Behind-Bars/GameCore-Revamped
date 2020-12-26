@@ -36,12 +36,13 @@ public class NamecolorCDM extends Command {
 		if(Main.getPlayerHandler(player).getDonateNameColor() == 0) {
 			player.sendMessage(Main.getColorHandler().noPermission);
 		}else if(args.length != 2) {
-			player.sendMessage(Main.getColorHandler().usage + args[0] + " <color>");
+			player.sendMessage(Main.getColorHandler().usage + "namecolor <color>");
 			player.sendMessage(Main.getColorHandler().donation 
-					+ "Available name colors: §2DarkGreen §6Gold §8DarkGray §aGreen §cRed §eYellow §1DarkBlue §3DarkAqua §5Purple §7Gray §9Blue §bAqua §dPink §fWhite");
+					+ ChatColor.translateAlternateColorCodes('&', 
+							"Available name colors: &2DarkGreen &6Gold &8DarkGray &aGreen &cRed &eYellow &1DarkBlue &3DarkAqua &5Purple &7Gray &9Blue &bAqua &dPink &fWhite"));
 		}else {
 			for(ChatColor color : ChatColor.values()) {
-				if(color.name().replace("_", "").equalsIgnoreCase(args[1])) {
+				if(color.name().replace("_", "").equalsIgnoreCase(args[0])) {
 					Main.getPlayerHandler(player).setNickname(color + player.getName());
 					player.sendMessage(Main.getColorHandler().donation + "Namecolor set!");
 				}

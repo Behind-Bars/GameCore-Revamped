@@ -62,9 +62,9 @@ public class PetCMD extends Command {
 	
 	        //make check to see if player has a pet current time
 	
-	        player.sendMessage(Main.getColorHandler().donation + "Spawned your pet " + args[1]);
+	        player.sendMessage(Main.getColorHandler().donation + "Spawned your pet " + args[0]);
 	
-	        switch(args[1].toLowerCase()) {
+	        switch(args[0].toLowerCase()) {
 	        case "creeper":
 	            makePet(player, EntityTypes.CREEPER);
 	            break;

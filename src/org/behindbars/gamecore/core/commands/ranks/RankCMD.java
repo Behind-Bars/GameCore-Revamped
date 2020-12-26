@@ -33,20 +33,20 @@ public class RankCMD extends Command {
 		if (sender instanceof ConsoleCommandSender) return true;
 		Player player = (Player) sender;
 		
-		if(args[0].equalsIgnoreCase("list")) {
+		if(args.length == 1 && args[0].equalsIgnoreCase("list")) {
 			player.sendMessage(Main.getColorHandler().main + "Charlie: " + Main.getColorHandler().message + "Free!");
 			player.sendMessage(Main.getColorHandler().main + "Bravo: " + Main.getColorHandler().message + "10000!");
 			player.sendMessage(Main.getColorHandler().main + "Alpha: " + Main.getColorHandler().message + "20000!");
 			player.sendMessage(Main.getColorHandler().main + "Elite: " + Main.getColorHandler().message + "50000!");
 			player.sendMessage(Main.getColorHandler().main + "Free: " + Main.getColorHandler().message + "100000!");
-		}else if (args[0].equalsIgnoreCase("set")) {
+		}else if (args.length == 3 && args[0].equalsIgnoreCase("set")) {
 			if(Main.getPlayerHandler(player).getRank() < 10) {
 				player.sendMessage(Main.getColorHandler().noPermission);
 			} else {
 				Player target = Bukkit.getPlayerExact(args[1]);
 	
 				if(args.length != 3) {
-					player.sendMessage(Main.getColorHandler().usage + args[0] + " <player> <rank>");
+					player.sendMessage(Main.getColorHandler().usage + "/rank set <player> <rank>");
 				}else {
 	
 					try {

@@ -1,4 +1,10 @@
-name: gamecore
 main: org.behindbars.gamecore.Main
-version: 1.0
+version: 1.1.2
 api-version: 1.16
+author: [Geppi, XenoPyax]
+name: GameCore
+load: STARTUP
+
+commands:
+  gamemode:
+    aliases: [gm]

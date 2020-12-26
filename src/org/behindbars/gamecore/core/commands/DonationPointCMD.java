@@ -35,26 +35,26 @@ public class DonationPointCMD extends Command {
 		
 		if(Main.getPlayerHandler(player).getRank() < 10) {
 			player.sendMessage(Main.getColorHandler().noPermission);
-		}else if(args.length != 4) {
-			player.sendMessage(Main.getColorHandler().usage + args[0] + " add/remove <player> <amount>");
+		}else if(args.length != 3) {
+			player.sendMessage(Main.getColorHandler().usage + "/donationpoint add/remove <player> <amount>");
 		}else {
-			Player target = Bukkit.getPlayer(args[2]);
+			Player target = Bukkit.getPlayer(args[1]);
 			if(target == null) {
 				player.sendMessage(Main.getColorHandler().offlinePlayer + "This player is offline!");
 			}
 
 			try {
-				int num = Integer.parseInt(args[3]);
+				int num = Integer.parseInt(args[2]);
 	
-				if(args[1].equalsIgnoreCase("add")) {
-					player.sendMessage(Main.getColorHandler().donation + "Added " + String.valueOf(args[3]) + " points to " + target.getName());
-					Main.getPlayerHandler(target).addDonationPoints(Integer.parseInt(args[3]));
-				}else if(args[1].equalsIgnoreCase("remove")) {
+				if(args[0].equalsIgnoreCase("add")) {
+					player.sendMessage(Main.getColorHandler().donation + "Added " + String.valueOf(args[2]) + " points to " + target.getName());
+					Main.getPlayerHandler(target).addDonationPoints(Integer.parseInt(args[2]));
+				}else if(args[0].equalsIgnoreCase("remove")) {
 					if(num > Main.getPlayerHandler(target).getMoney()) {
 						player.sendMessage(Main.getColorHandler().donation + target.getName() + " does not have enough donation points to remove!");
 					}else {
-						player.sendMessage(Main.getColorHandler().donation + "Removed $" + String.valueOf(args[3]) + " to " + target.getName());
-						Main.getPlayerHandler(target).addDonationPoints(Integer.parseInt(args[3]));
+						player.sendMessage(Main.getColorHandler().donation + "Removed $" + String.valueOf(args[2]) + " to " + target.getName());
+						Main.getPlayerHandler(target).addDonationPoints(Integer.parseInt(args[2]));
 					}
 				}
 			} catch (NumberFormatException ex){

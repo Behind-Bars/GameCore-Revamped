@@ -32,6 +32,7 @@ public class EventHandler {
 	
 	public EventHandler() {
 		pluginManager = Bukkit.getPluginManager();
+		registerEvents();
 	}
 	
 	public void registerEvent(Listener... events)	{
@@ -40,7 +41,7 @@ public class EventHandler {
 		}
 	}
 
-	public void registerEvents() {
+	private void registerEvents() {
 		registerEvent(new BlockBreak(), new CraftItem(), new PlayerBlockPhysics(), new PlayerJoin(), new PlayerLeave(), new PlaceBlock(), new PlayerChats(), new PlayerRespawn(), new EntityAttackEntity(),
 				new EntityDeath(), new PlayerInteractSignChange(), new InventoryClick(), new PlayerMove(), new PickupItem(), new PlayerInteractEntity());
 	}

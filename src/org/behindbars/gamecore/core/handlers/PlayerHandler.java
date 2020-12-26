@@ -6,13 +6,16 @@ Discord: XenoPyax#5647
 
 package org.behindbars.gamecore.core.handlers;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.behindbars.gamecore.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import io.github.xenopyax.xenoapi.api.Config;
@@ -23,11 +26,15 @@ public class PlayerHandler {
 	private Date now;
 	private SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 	private Config config;
-	private Player player ;
+	private Player player;
 	
 	public PlayerHandler(Player player) {
 		config = Main.getXenoAPI().getConfigManager().getNewConfig("/PlayerData/" + player.getUniqueId().toString() + ".config");
 		this.player = player;
+	}
+	
+	public boolean isSetup() {
+		return config.contains("General");
 	}
 
 	public void setupPlayer() {
@@ -124,22 +131,20 @@ public class PlayerHandler {
 	}
 
 	public long getPrisonParkourDate(String parkourNumber) {
-		return Main.getXenoAPI().getConfigManager().getNewConfig("/PlayerData/" + player.getUniqueId() + ".config").getInt("PrisonParkour.prisonParkour" + parkourNumber);
+		return config.getInt("PrisonParkour.prisonParkour" + parkourNumber);
 	}
 
 	public boolean setPrisonParkourDate(String parkourNumber) {
-		Config config = Main.getXenoAPI().getConfigManager().getNewConfig("/PlayerData/" + player.getUniqueId() + ".config");
 		config.set("PrisonParkour.prisonParkour" + parkourNumber, System.currentTimeMillis());
 		config.saveConfig();
 		return true;
 	}
 
 	public int getBountyValue() {
-		return Main.getXenoAPI().getConfigManager().getNewConfig("/PlayerData/" + player.getUniqueId() + ".config").getInt("General.getBountyValue.");
+		return config.getInt("General.getBountyValue.");
 	}
 
 	public boolean setBountyValue(int num) {
-		Config config = Main.getXenoAPI().getConfigManager().getNewConfig("/PlayerData/" + player.getUniqueId() + ".config");
 		config.set("General.getBountyValue.", num);
 		config.saveConfig();
 		return true;
@@ -147,44 +152,40 @@ public class PlayerHandler {
 
 
 	public int isInJail() {
-		return Main.getXenoAPI().getConfigManager().getNewConfig("/PlayerData/" + player.getUniqueId() + ".config").getInt("General.isInJail");
+		return config.getInt("General.isInJail");
 	}
 
 	public boolean setInJail(int num) {
-		Config config = Main.getXenoAPI().getConfigManager().getNewConfig("/PlayerData/" + player.getUniqueId() + ".config");
 		config.set("General.isInJail", num);
 		config.saveConfig();
 		return true;
 	}
 
 	public int getJailTime() {
-		return Main.getXenoAPI().getConfigManager().getNewConfig("/PlayerData/" + player.getUniqueId() + ".config").getInt("General.jailTime");
+		return config.getInt("General.jailTime");
 	}
 
 	public boolean setJailTime(int num) {
-		Config config = Main.getXenoAPI().getConfigManager().getNewConfig("/PlayerData/" + player.getUniqueId() + ".config");
 		config.set("General.jailTime", num);
 		config.saveConfig();
 		return true;
 	}
 
 	public int getCombatLogTime() {
-		return Main.getXenoAPI().getConfigManager().getNewConfig("/PlayerData/" + player.getUniqueId() + ".config").getInt("Killstreak.combatLog");
+		return config.getInt("Killstreak.combatLog");
 	}
 
 	public boolean setCombatLogTime(int num) {
-		Config config = Main.getXenoAPI().getConfigManager().getNewConfig("/PlayerData/" + player.getUniqueId() + ".config");
 		config.set("Killstreak.combatLog", num);
 		config.saveConfig();
 		return true;
 	}
 
 	public long getEastereggDate(String parkourNumber) {
-		return Main.getXenoAPI().getConfigManager().getNewConfig("/PlayerData/" + player.getUniqueId() + ".config").getInt("Easteregg." + parkourNumber);
+		return config.getInt("Easteregg." + parkourNumber);
 	}
 
 	public boolean setEastereggDate(String parkourNumber) {
-		Config config = Main.getXenoAPI().getConfigManager().getNewConfig("/PlayerData/" + player.getUniqueId() + ".config");
 		config.set("Easteregg." + parkourNumber, System.currentTimeMillis());
 		config.saveConfig();
 		return true;
@@ -192,7 +193,7 @@ public class PlayerHandler {
 
 
 	public long getParkourDate(String parkourNumber) {
-		return Main.getXenoAPI().getConfigManager().getNewConfig("/PlayerData/" + player.getUniqueId() + ".config").getInt("Parkour.parkour" + parkourNumber);
+		return config.getInt("Parkour.parkour" + parkourNumber);
 	}
 
 	public boolean setParkourDate(String parkourNumber) {
@@ -555,14 +556,13 @@ public class PlayerHandler {
 		return config.getInt("General.Rank");
 	}
 
-	public boolean setRank(int rank) {
+	public void setRank(int rank) {
 		config.set("General.Rank", Integer.valueOf(rank));
 		config.saveConfig();
 		
 		Bukkit.getServer().broadcastMessage(Main.getColorHandler().main + "Rank: "+ player.getName() + "'s rank has been updated to " + rankToString());
 		player.setCustomName(rankToString() + getNickname());
 		player.setPlayerListName(rankToString() + getNickname());
-		return true;
 	}
 
 	public int getReferrals() {

@@ -36,24 +36,24 @@ public class TokenEconomyCMD extends Command {
 		if(Main.getPlayerHandler(player).getRank() < 10) {
 			player.sendMessage(Main.getColorHandler().noPermission);
 		}else if(args.length != 4) {
-			player.sendMessage(Main.getColorHandler().usage + args[0] + " add/remove <player> <amount>");
+			player.sendMessage(Main.getColorHandler().usage + "/tokeneconomy add/remove <player> <amount>");
 		}else {
-			Player target = Bukkit.getPlayer(args[2]);
+			Player target = Bukkit.getPlayer(args[1]);
 			if(target == null) {
 				player.sendMessage(Main.getColorHandler().offlinePlayer + "This player is offline!");
 			}else {
 				try {
-					int num = Integer.parseInt(args[3]);
+					int num = Integer.parseInt(args[2]);
 		
-					if(args[1].equalsIgnoreCase("add")) {
-						player.sendMessage(Main.getColorHandler().main + "Token: " + Main.getColorHandler().message + "Added " + String.valueOf(args[3]) + " to " + target.getName());
-						Main.getPlayerHandler(target).addToken(Integer.parseInt(args[3]));
-					}else if(args[1].equalsIgnoreCase("remove")) {
+					if(args[0].equalsIgnoreCase("add")) {
+						player.sendMessage(Main.getColorHandler().main + "Token: " + Main.getColorHandler().message + "Added " + String.valueOf(args[2]) + " to " + target.getName());
+						Main.getPlayerHandler(target).addToken(Integer.parseInt(args[2]));
+					}else if(args[0].equalsIgnoreCase("remove")) {
 						if(num > Main.getPlayerHandler(target).getToken()) {
 							player.sendMessage(Main.getColorHandler().main + "Token: " + Main.getColorHandler().message + target.getName() + " does not have that many tokens to remove!");
 						}else {
-							player.sendMessage(Main.getColorHandler().main + "Token: " + Main.getColorHandler().message + "Removed " + String.valueOf(args[3]) + " to " + target.getName());
-							Main.getPlayerHandler(target).removeToken(Integer.parseInt(args[3]));
+							player.sendMessage(Main.getColorHandler().main + "Token: " + Main.getColorHandler().message + "Removed " + String.valueOf(args[2]) + " to " + target.getName());
+							Main.getPlayerHandler(target).removeToken(Integer.parseInt(args[2]));
 						}
 					}
 				} catch (NumberFormatException ex){

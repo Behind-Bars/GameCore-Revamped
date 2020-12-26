@@ -36,8 +36,8 @@ public class EventCMD extends Command {
         if(Main.getPlayerHandler(player).getRank() < 10) {
             player.sendMessage(Main.getColorHandler().noPermission);
         }else if(args.length != 2) {
-            player.sendMessage(Main.getColorHandler().usage + args[0] + " <Landfall>");
-        }else if(args[1].equalsIgnoreCase("landfall")) {
+            player.sendMessage(Main.getColorHandler().usage + "/event <Landfall>");
+        }else if(args[0].equalsIgnoreCase("landfall")) {
             GUI.eventLandFallInv(player);
         }
 		return true;

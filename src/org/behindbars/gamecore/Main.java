@@ -57,9 +57,6 @@ public class Main extends JavaPlugin {
 		warpHandler = new WarpHandler();
 		infoHandler = new InfoHandler();
 		redstoneLimit = new RedstoneLimit();
-		
-		commandHandler.registerCommands();
-		eventHandler.registerEvents();
 	}
 
 	public static Main getInstance() {
