@@ -20,6 +20,10 @@ import org.behindbars.gamecore.core.handlers.PlayerHandler;
 import org.behindbars.gamecore.core.handlers.WarpHandler;
 import org.behindbars.gamecore.core.util.RedstoneLimit;
 import org.behindbars.gamecore.core.util.TimeFormatHandler;
+import org.behindbars.gamecore.smp.CommandWild;
+import org.bukkit.Bukkit;
+import org.bukkit.WorldCreator;
+import org.bukkit.WorldType;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -57,6 +61,12 @@ public class Main extends JavaPlugin {
 		warpHandler = new WarpHandler();
 		infoHandler = new InfoHandler();
 		redstoneLimit = new RedstoneLimit();
+
+		Bukkit.getServer().getPluginManager().registerEvents(new CommandWild(), this);
+		WorldCreator worldCreator = new WorldCreator("SMP");
+		worldCreator.generateStructures(false);
+		worldCreator.type(WorldType.NORMAL);
+		Bukkit.createWorld(worldCreator);
 	}
 
 	public static Main getInstance() {
@@ -88,6 +98,12 @@ public class Main extends JavaPlugin {
 		PlayerHandler playerHandler = new PlayerHandler(player);
 		handlers.put(player.getUniqueId(), playerHandler);
 		return playerHandler;
+	}
+
+	private HashMap<Player, Player> tpa = new HashMap<Player, Player>();
+
+	public HashMap<Player,Player> getTpa(){
+		return tpa;
 	}
 
 	public static TimeFormatHandler getTimeformatHandler() {

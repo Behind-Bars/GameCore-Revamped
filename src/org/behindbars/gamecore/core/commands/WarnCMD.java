@@ -35,10 +35,10 @@ public class WarnCMD extends Command {
 		
 		if (Main.getPlayerHandler(player).getRank() < 8) {
             player.sendMessage(Main.getColorHandler().noPermission);
-        }else if (args.length < 3) {
+        }else if (args.length < 2) {
             player.sendMessage(Main.getColorHandler().usage + "/warn <player> <reason>");
         }else {
-	        Player target = Bukkit.getPlayerExact(args[1]);
+	        Player target = Bukkit.getPlayerExact(args[0]);
 	        if (target == null) {
 	            player.sendMessage(Main.getColorHandler().offlinePlayer);
 	        }else {

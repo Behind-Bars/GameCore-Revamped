@@ -38,7 +38,7 @@ public class KitCMD extends Command {
 		if (sender instanceof ConsoleCommandSender) return true;
 		Player player = (Player) sender;
 		
-		if (!(args.length == 2)) {
+		if (!(args.length == 1)) {
             player.sendMessage(Main.getColorHandler().usage + "/kit <name>");
         }else if(args[0].equalsIgnoreCase("tools")) {
             long elapsedTime = System.currentTimeMillis() - Main.getPlayerHandler(player).getKitToolsDate();

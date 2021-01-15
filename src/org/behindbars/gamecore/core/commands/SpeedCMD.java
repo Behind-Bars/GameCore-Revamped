@@ -31,12 +31,13 @@ public class SpeedCMD extends Command {
 	public boolean execute(CommandSender sender, String commandLabel, String[] args) {
 		if (sender instanceof ConsoleCommandSender) return true;
 		Player player = (Player) sender;
-		
+		if(args.length == 0) {
+			player.sendMessage(Main.getColorHandler().usage + "/speed 1-10");
+			return true;
+		}
 		if(Main.getPlayerHandler(player).getRank() < 10) {
 			player.sendMessage(Main.getColorHandler().noPermission);
-		}else if(args.length != 2) {
-			player.sendMessage(Main.getColorHandler().usage + args[0] + " <1-10>");
-		}else {
+		} else {
 			try {
 				int speed = Integer.parseInt(args[0]);
 				player.setFlySpeed((float)speed / 10.0f);

@@ -19,6 +19,12 @@ public class PlayerMove implements Listener {
 	@EventHandler
 	public void onMove(PlayerMoveEvent event) {
 		Player player = event.getPlayer();
+
+		if(player.getWorld().getName().equalsIgnoreCase("SMP")) {
+
+
+
+		}
 		
 		if(player.getLocation().getBlock().getRelative(BlockFace.DOWN).getType().equals(Material.PURPUR_BLOCK)) {
 			player.setVelocity(new Vector(player.getLocation().getDirection().multiply(0.85).getX(), 0D, player.getLocation().getDirection().multiply(0.85).getZ()));

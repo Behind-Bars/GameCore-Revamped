@@ -19,6 +19,10 @@ public class CraftItem implements Listener {
 	
 	@EventHandler
 	public void craftItem(PrepareItemCraftEvent e) {
+
+		//TODO READY THIS FOR PRISON
+
+	/*
 		if(e.getRecipe() == null) return;
 		Material itemType = e.getRecipe().getResult().getType();
 		
@@ -45,7 +49,7 @@ public class CraftItem implements Listener {
 				}
 			}
 			return;
-		}
+		}*/
 	}
 
 }

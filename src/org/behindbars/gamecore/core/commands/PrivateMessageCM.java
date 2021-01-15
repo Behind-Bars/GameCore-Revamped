@@ -34,20 +34,23 @@ public class PrivateMessageCM extends Command {
 	public boolean execute(CommandSender sender, String commandLabel, String[] args) {
 		if (sender instanceof ConsoleCommandSender) return true;
 		Player player = (Player) sender;
-		
-		if(args.length < 3) {
-			player.sendMessage(Main.getColorHandler().usage + args[0] + " <player> <message>");
+		if(args.length == 0) {
+			player.sendMessage(Main.getColorHandler().usage + "/msg <player> <message>");
+			return true;
+		}
+		if(args.length < 2) {
+			player.sendMessage(Main.getColorHandler().usage + "/msg <player> <message>");
 		}else {
-			Player target = Bukkit.getPlayer(args[1]);
+			Player target = Bukkit.getPlayer(args[0]);
 			
 			if(target == null) {
-				player.sendMessage(Main.getColorHandler().offlinePlayer + "This player is offline!");
+				player.sendMessage(Main.getColorHandler().offlinePlayer);
 			}else {
 				String message = String.join(" ", Arrays.copyOfRange(args, 1, args.length));
 				player.sendMessage(ChatColor.DARK_PURPLE + "[" + ChatColor.LIGHT_PURPLE + player.getName() + ChatColor.DARK_PURPLE + " > " + ChatColor.LIGHT_PURPLE 
-						+ target.getName() + ChatColor.DARK_PURPLE + "]" + ChatColor.ITALIC + message);
+						+ target.getName() + ChatColor.DARK_PURPLE + "] " + ChatColor.ITALIC + message);
 				target.sendMessage(ChatColor.DARK_PURPLE + "[" + ChatColor.LIGHT_PURPLE + player.getName() + ChatColor.DARK_PURPLE + " > " + ChatColor.LIGHT_PURPLE 
-						+ target.getName() + ChatColor.DARK_PURPLE + "]" + ChatColor.ITALIC + message);
+						+ target.getName() + ChatColor.DARK_PURPLE + "] " + ChatColor.ITALIC + message);
 		
 				Main.getPlayerHandler(player).setLastMessaged(target.getName());
 			}

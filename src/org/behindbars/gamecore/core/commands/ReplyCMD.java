@@ -35,8 +35,8 @@ public class ReplyCMD extends Command {
 		if (sender instanceof ConsoleCommandSender)	return true;
 		Player player = (Player) sender;
 		
-		if(args.length < 2) {
-			player.sendMessage(Main.getColorHandler().usage + args[0] + " <message>");
+		if(args.length < 1) {
+			player.sendMessage(Main.getColorHandler().usage + "/r <message>");
 		}else {
 			Player target = Bukkit.getPlayer(Main.getPlayerHandler(player).getLastMessaged());
 			

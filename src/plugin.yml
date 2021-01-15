@@ -8,3 +8,6 @@ load: STARTUP
 commands:
   gamemode:
     aliases: [gm]
+  wild:
+  tpa:
+  tpaccept:

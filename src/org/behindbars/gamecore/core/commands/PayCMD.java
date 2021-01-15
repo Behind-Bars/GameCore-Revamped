@@ -36,15 +36,15 @@ public class PayCMD extends Command {
 		if(args.length < 3) {
             player.sendMessage(Main.getColorHandler().usage + args[0] + " <player> <amount>");
         }else {
-	        Player target = Bukkit.getPlayer(args[1]);
+	        Player target = Bukkit.getPlayer(args[0]);
 	        
 	        if(target == null) {
 	            player.sendMessage(Main.getColorHandler().offlinePlayer + "This player is offline!");
 	        }else {
 		        try {
-		        	int num = Integer.parseInt(args[2]);
+		        	int num = Integer.parseInt(args[1]);
 		
-			        if(Main.getPlayerHandler(player).getMoney() < Integer.parseInt(args[2])) {
+			        if(Main.getPlayerHandler(player).getMoney() < Integer.parseInt(args[1])) {
 			            player.sendMessage(Main.getColorHandler().main + "Balance: " + Main.getColorHandler().message + "You do not have enough money!");
 			        }else {
 			        Main.getPlayerHandler(player).removeMoney(num);

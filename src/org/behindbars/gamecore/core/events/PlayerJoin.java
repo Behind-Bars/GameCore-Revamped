@@ -45,6 +45,8 @@ public class PlayerJoin implements Listener {
 			player.hidePlayer(Main.getInstance(), player);
 			return;
 		}
+
+		Main.getPlayerHandler(player).setAcceptRules(1);
 		
 		if(Main.getPlayerHandler(player).getAcceptRules() == 0) {
 			player.setFlySpeed(0f);
@@ -68,8 +70,9 @@ public class PlayerJoin implements Listener {
 
 		if(!player.hasPlayedBefore()) {
 			event.setJoinMessage(ChatColor.YELLOW + ChatColor.BOLD.toString() + "Welcome " + player.getName());
+
+			Location cspawn = new Location(Bukkit.getWorld("SMP"), 32525,78,-15557);
 			//Location cspawn = new Location(Bukkit.getWorld("world"), -0.5,138,198.5);
-			Location cspawn = new Location(Bukkit.getWorld("tempsurvival"), -0.5,138,198.5);
 
 			player.teleport(cspawn);
 

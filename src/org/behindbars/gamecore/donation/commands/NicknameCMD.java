@@ -58,9 +58,7 @@ public class NicknameCMD extends Command {
 			player.setPlayerListName(Main.getPlayerHandler(player).rankToString() + Main.getPlayerHandler(player).getNickname());
 			player.sendMessage(Main.getColorHandler().donation + "You changed your nickname to " + args[0].replaceAll("&","§"));
 	
-			if(args[0].equalsIgnoreCase("/nickrgb")) {
-				setRGBNick(player, args[0], args[1]);
-			}
+
 		}
 		return true;
 	}
@@ -78,31 +76,7 @@ public class NicknameCMD extends Command {
 		return ChatColor.translateAlternateColorCodes('&', msg);
 	}
 
-	public void setRGBNick(Player player, String hexFrom, String hexTo) {
 
-		if((hexFrom.length() >= 6 && hexFrom.length() <= 7) || (hexTo.length() >= 6 && hexTo.length() <= 7)) {
-			player.sendMessage(Main.getColorHandler().error + "Your hex number is either to long or to short!");
-			return;
-		}
-
-		if(!hexFrom.matches("[a-zA-Z0-9_]*")){
-			player.sendMessage(Main.getColorHandler().error + "You can only type letters and numbers in!");
-			return;
-		}
-		if(!hexTo.matches("[a-zA-Z0-9_]*")){
-			player.sendMessage(Main.getColorHandler().error + "You can only type letters and numbers in!");
-			return;
-		}
-
-		try {
-			Main.getPlayerHandler(player).setNickname(Main.getXenoAPI().gradient(player.getName(), hexFrom, hexTo, false, false, false, false, false));
-			player.setCustomName(Main.getPlayerHandler(player).rankToString() + Main.getPlayerHandler(player).getNickname());
-			player.setPlayerListName(Main.getPlayerHandler(player).rankToString() + Main.getPlayerHandler(player).getNickname());
-			player.sendMessage(Main.getColorHandler().donation + "You changed your nickname to " + Main.getPlayerHandler(player).getNickname());
-		} catch (NumberFormatException ignored) {
-			player.sendMessage(Main.getColorHandler().error + "You have typed an invalid HEX code in!");
-		}
-	}
 
 	@Override
 	public List<String> tabComplete(CommandSender sender, String alias, String[] args) {

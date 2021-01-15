@@ -18,6 +18,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.event.player.PlayerPortalEvent;
+import org.bukkit.event.world.PortalCreateEvent;
 
 public class PlaceBlock implements Listener {
 
@@ -126,6 +128,15 @@ public class PlaceBlock implements Listener {
 		return true;
 	}
 
+	public void onPortal(PlayerPortalEvent event) {
+		event.setCanCreatePortal(false);
+		event.setCancelled(true);
+		return;
+	}
+	public void onPortal(PortalCreateEvent event) {
+		event.setCancelled(true);
+		return;
+	}
 	public static boolean isSafeLocation(Location location) {
 		Block feet = location.getBlock();
 		if (!feet.getType().isTransparent() && !feet.getLocation().add(0, 1, 0).getBlock().getType().isTransparent()) {

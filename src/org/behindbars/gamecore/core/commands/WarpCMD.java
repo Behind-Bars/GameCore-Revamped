@@ -35,7 +35,7 @@ public class WarpCMD extends Command {
 		if (Main.getPlayerHandler(player).getRank() < 10) {
 			player.sendMessage(Main.getColorHandler().noPermission);
 		}else if (!(args.length == 2)) {
-			player.sendMessage(Main.getColorHandler().usage + "/warp set <warp>");
+			player.sendMessage(Main.getColorHandler().usage + "/warp <set/delete/list/'name'>");
 		} else {
 			Main.getWarpHandler().setWarp(args[1].toUpperCase(), player);
 
@@ -43,7 +43,7 @@ public class WarpCMD extends Command {
 				//0 = off || 1 = on
 				if (Main.getPlayerHandler(player).getRank() < 10) {
 					player.sendMessage(Main.getColorHandler().noPermission);
-				}else if (!(args.length == 2)) {
+				}else if (!(args.length == 1)) {
 					player.sendMessage(Main.getColorHandler().usage + "/delwarp <warp>");
 				}else {
 					Main.getWarpHandler().delWarp(args[1].toUpperCase(), player);
@@ -55,11 +55,19 @@ public class WarpCMD extends Command {
 				}else {
 					Main.getWarpHandler().getList(player);
 				}
+			}else if (args[0].equalsIgnoreCase("set")) {
+				//0 = off || 1 = on
+				if (Main.getPlayerHandler(player).getRank() < 10) {
+					player.sendMessage(Main.getColorHandler().noPermission);
+				}else {
+					Main.getWarpHandler().setWarp(args[1].toUpperCase(), player);
+				}
+
 			}else {
 				//0 = off || 1 = on
 				if (Main.getPlayerHandler(player).getRank() < 10) {
 					player.sendMessage(Main.getColorHandler().noPermission);
-				}else if (!(args.length == 1)) {
+				}else if (!(args.length == 0)) {
 					player.sendMessage(Main.getColorHandler().usage + "/warp <warp>");
 				}
 

@@ -42,7 +42,7 @@ public class TrailsCMD extends Command {
 				menu.openInventory(player);
 			}
 		}else if(args.length == 1) {
-			if(args[1].equalsIgnoreCase("remove")) {
+			if(args[0].equalsIgnoreCase("remove")) {
 				if(Main.getPlayerHandler(player).getDonateTrails() == 0) {
 					player.sendMessage(Main.getColorHandler().noPermission);
 				}else {

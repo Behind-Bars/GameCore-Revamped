@@ -58,16 +58,7 @@ import org.behindbars.gamecore.core.commands.ranks.RankupCMD;
 import org.behindbars.gamecore.core.commands.token.TokenCMD;
 import org.behindbars.gamecore.core.commands.token.TokenEconomyCMD;
 import org.behindbars.gamecore.core.commands.token.TokenShopCMD;
-import org.behindbars.gamecore.donation.commands.CraftCMD;
-import org.behindbars.gamecore.donation.commands.DiscoArmorCMD;
-import org.behindbars.gamecore.donation.commands.EventCMD;
-import org.behindbars.gamecore.donation.commands.FeedCMD;
-import org.behindbars.gamecore.donation.commands.HatCMD;
-import org.behindbars.gamecore.donation.commands.NamecolorCDM;
-import org.behindbars.gamecore.donation.commands.NicknameCMD;
-import org.behindbars.gamecore.donation.commands.PvPCMD;
-import org.behindbars.gamecore.donation.commands.SellCMD;
-import org.behindbars.gamecore.donation.commands.SpawnCMD;
+import org.behindbars.gamecore.donation.commands.*;
 import org.behindbars.gamecore.economy.commands.EconomyCMD;
 import org.behindbars.gamecore.economy.commands.MoneyCMD;
 import org.behindbars.gamecore.killstreak.KillstreakCMD;
@@ -99,7 +90,7 @@ public class CommandHandler {
 	
 	private void registerCommands() {
 		registerCommand(new BroadcastCMD(), new CraftCMD(), new DiscoArmorCMD(), new EventCMD(), new FeedCMD(), new HatCMD(), new MoneyCMD(), new EconomyCMD(),
-				new NamecolorCDM(), new NicknameCMD(), new PetCMD(), new PvPCMD(), new SellCMD(), new SpawnCMD(), new TrailsCMD(), new ClearChatCMD(), new ClearLagCMD(),
+				new NamecolorCDM(), new NicknameCMD() , new NickRGBCMD(), new PetCMD(), new PvPCMD(), new SellCMD(), new SpawnCMD(), new TrailsCMD(), new ClearChatCMD(), new ClearLagCMD(),
 				new DisposeCMD(), new DonationPointCMD(), new FlyCMD(), new PlayerHeadCMD(), new RankCMD(), new RankupCMD(), new RenameCMD(),
 				new SetupMapCMD(), new SpeedCMD(), new TeleportCMD(), new TokenCMD(), new TokenShopCMD(), new TokenEconomyCMD(), new VanishCMD(), new WorldCMD(),
 				new HomeCMD(), new BountyCMD(), new FilterCMD(), new HelpCMD(), new KitCMD(), new ListCMD(), new PayCMD(), new PrivateMessageCM(), new ReplyCMD(),

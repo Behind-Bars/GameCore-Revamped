@@ -21,9 +21,11 @@ public class PlayerRespawn implements Listener {
 	@EventHandler
 	public void onRespawn(PlayerRespawnEvent event) {
 		Player player = event.getPlayer();
-		Location spawn = new Location(Bukkit.getWorld("tempsurvival"), -0.5,125,-0.5);
+		Location cspawn = new Location(Bukkit.getWorld("SMP"), 32525,78,-15557);
 
-		event.setRespawnLocation(spawn);
+		Location spawn = new Location(Bukkit.getWorld("world"), -0.5,125,-0.5);
+
+		event.setRespawnLocation(cspawn);
 		if(Main.getPlayerHandler(player).getAcceptRules() ==0) {
 			new BukkitRunnable() {
 				@Override

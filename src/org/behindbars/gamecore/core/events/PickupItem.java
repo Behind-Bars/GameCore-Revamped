@@ -21,6 +21,10 @@ public class PickupItem implements Listener {
 			Player player = (Player) event.getEntity();
 			player.updateInventory();
 
+			if(player.getWorld().getName().equalsIgnoreCase("SMP")) {
+				return;
+			}
+
 			if (Main.getPlayerHandler(player).getRank() < 6) {
 				if (event.getItem().getItemStack().getType().equals(Material.CHAINMAIL_HELMET)
 						|| event.getItem().getItemStack().getType().equals(Material.CHAINMAIL_CHESTPLATE)

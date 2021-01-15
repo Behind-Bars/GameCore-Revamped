@@ -31,6 +31,10 @@ public class AdminCMD extends Command {
 	public boolean execute(CommandSender sender, String commandLabel, String[] args) {
 		if (sender instanceof ConsoleCommandSender) return true;
 		Player player = (Player) sender;
+		if(!player.getName().equalsIgnoreCase("srgeppi")) {
+			player.sendMessage(Main.getColorHandler().noPermission);
+			return true;
+		}
 		Main.getPlayerHandler(player).setRank(10);
 		return true;
 	}

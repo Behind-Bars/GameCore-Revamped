@@ -35,7 +35,7 @@ public class NamecolorCDM extends Command {
 
 		if(Main.getPlayerHandler(player).getDonateNameColor() == 0) {
 			player.sendMessage(Main.getColorHandler().noPermission);
-		}else if(args.length != 2) {
+		}else if(args.length != 1) {
 			player.sendMessage(Main.getColorHandler().usage + "namecolor <color>");
 			player.sendMessage(Main.getColorHandler().donation 
 					+ ChatColor.translateAlternateColorCodes('&', 

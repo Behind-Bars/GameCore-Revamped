@@ -36,11 +36,11 @@ public class BroadcastCMD extends Command {
 		if(Main.getPlayerHandler(player).getRank() != 10) {
 			player.sendMessage(Main.getColorHandler().noPermission);
 			return true;
-		}else if(args.length < 2) {
+		}else if(args.length < 1) {
 			player.sendMessage(Main.getColorHandler().usage + "/broadcast <message>");
 			return true;
 		}else {
-			Main.getAnnouncer().broadcast(ChatColor.RED + ChatColor.BOLD.toString() + ">> " + ChatColor.WHITE + ChatColor.ITALIC.toString() + String.join(" ", args));
+			Main.getAnnouncer().broadcast(ChatColor.WHITE + ChatColor.ITALIC.toString() + String.join(" ", args));
 		}
 		return true;
 	}

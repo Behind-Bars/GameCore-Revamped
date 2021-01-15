@@ -19,7 +19,7 @@ import org.bukkit.entity.Player;
 
 public class ListCMD extends Command {
 
-	private static String name = "";
+	private static String name = "list";
 	private static String description = "";
 	private static String usageMessage = "";
 	private static List<String> aliases = Arrays.asList("");

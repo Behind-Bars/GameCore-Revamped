@@ -39,18 +39,24 @@ public class WorldCMD extends Command {
 	public boolean execute(CommandSender sender, String commandLabel, String[] args) {
 		if (sender instanceof ConsoleCommandSender) return true;
 		Player player = (Player) sender;
-		
+
+		if(args.length == 0) {
+			player.sendMessage(Main.getColorHandler().usage + "/world <create/list/tp>");
+			return true;
+		}
+
 		if(args[0].equalsIgnoreCase("create")) {
 			if(Main.getPlayerHandler(player).getRank() < 10) {
 				player.sendMessage(Main.getColorHandler().noPermission);
 			}else if(args.length != 2) {
-				player.sendMessage(Main.getColorHandler().usage + args[0] + " <world>");
+
+					player.sendMessage(Main.getColorHandler().usage + args[0] + " <world>");
 			}else if (Bukkit.getWorld(args[1]) != null) {
 				player.sendMessage(Main.getColorHandler().main + "World: " + Main.getColorHandler().message + " World already made!");
 			}else {
 				WorldCreator worldCreator = new WorldCreator(args[1]);
 				worldCreator.generateStructures(false);
-				worldCreator.type(WorldType.FLAT);
+				worldCreator.type(WorldType.NORMAL);
 	
 				Bukkit.getServer().createWorld(worldCreator);
 				new BukkitRunnable() {
@@ -71,10 +77,10 @@ public class WorldCMD extends Command {
 			if(Main.getPlayerHandler(player).getRank() < 10) {
 				player.sendMessage(Main.getColorHandler().noPermission);
 			}else if(args.length != 2) {
-				player.sendMessage(Main.getColorHandler().usage + args[1] + " <world>");
+				player.sendMessage(Main.getColorHandler().usage + args[0] + " <world>");
 			}else {
-				Location loc = new Location(Bukkit.getWorld(args[2]), 1, 1, 1);
-				player.sendMessage(Main.getColorHandler().main + "World: " + "You have been teleported to world " + args[2] + "!");
+				Location loc = new Location(Bukkit.getWorld(args[1]), 1, 1, 1);
+				player.sendMessage(Main.getColorHandler().main + "World: " + "You have been teleported to world " + args[1] + "!");
 				player.teleport(loc);
 			}
 		}else if(args[0].equalsIgnoreCase("list")) {
@@ -88,7 +94,24 @@ public class WorldCMD extends Command {
 	@Override
 	public List<String> tabComplete(CommandSender sender, String alias, String[] args) {
 		List<String> list = new ArrayList<>();
+
+		if(args.length == 1) {
+
+			list.addAll(Arrays.asList("create","list","tp"));
+		}else if(args.length == 2) {
+			if(args[0].equalsIgnoreCase("tp")) {
+				Bukkit.getWorlds().forEach((w) -> {
+					list.add(w.getName());
+
+				});
+			}
+		}
+
+
 		return list;
+
 	}
+
+
 
 }

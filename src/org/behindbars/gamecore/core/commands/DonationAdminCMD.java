@@ -22,7 +22,7 @@ public class DonationAdminCMD extends Command {
 	private static String name = "donationadmin";
 	private static String description = "";
 	private static String usageMessage = "";
-	private static List<String> aliases = Arrays.asList("donationadmiun");
+	private static List<String> aliases = Arrays.asList("");
 
 	public DonationAdminCMD() {
 		super(name, description, usageMessage, aliases);
@@ -32,24 +32,27 @@ public class DonationAdminCMD extends Command {
 	public boolean execute(CommandSender sender, String commandLabel, String[] args) {
 		if (sender instanceof ConsoleCommandSender) return true;
 		Player player = (Player) sender;
-
+		if(args.length == 0) {
+			player.sendMessage(Main.getColorHandler().usage + "/donationadmin <add/remove> <player> <#>");
+			return true;
+		}
 		if(Main.getPlayerHandler(player).getRank() < 10) {
 			player.sendMessage(Main.getColorHandler().noPermission);
-		}else if(args.length != 4) {
+		}else if(args.length != 3) {
 			player.sendMessage(Main.getColorHandler().usage + args[0] + " add/remove <player> <donation>");
 		}else {
-			Player target = Bukkit.getPlayerExact(args[2]);
+			Player target = Bukkit.getPlayerExact(args[1]);
 			if(target == null) {
-				player.sendMessage(Main.getColorHandler().offlinePlayer + "This player is offline!");
+				player.sendMessage(Main.getColorHandler().offlinePlayer);
 			}else {
 				try {
-					int num = Integer.parseInt(args[3]);
+					int num = Integer.parseInt(args[2]);
 		
 					if(num < 1 || num > 10) {
 						player.sendMessage(Main.getColorHandler().error + "Must be numbers 1-10, check /donate to see the relating number");
-					}else if(args[1].equalsIgnoreCase("add")) {
-						player.sendMessage(Main.getColorHandler().donation + Main.getColorHandler().message + "Added donation " + String.valueOf(args[3]) + " to " + target.getName());
-						target.sendMessage(Main.getColorHandler().donation + Main.getColorHandler().message + "Donation added " + String.valueOf(args[3]) + " by " + player.getName());
+					}else if(args[0].equalsIgnoreCase("add")) {
+						player.sendMessage(Main.getColorHandler().donation + Main.getColorHandler().message + "Added donation " + String.valueOf(args[2]) + " to " + target.getName());
+						target.sendMessage(Main.getColorHandler().donation + Main.getColorHandler().message + "Donation added " + String.valueOf(args[2]) + " by " + player.getName());
 			
 						switch(num) {
 						case 1: //Hat
@@ -83,7 +86,7 @@ public class DonationAdminCMD extends Command {
 							Main.getPlayerHandler(target).setDonateDiscoArmor(1);
 							break;
 						}		
-					}else if(args[1].equalsIgnoreCase("remove")) {
+					}else if(args[0].equalsIgnoreCase("remove")) {
 						player.sendMessage(Main.getColorHandler().donation + Main.getColorHandler().message + "Removed donation " + String.valueOf(args[3]) + " to " + target.getName());
 						target.sendMessage(Main.getColorHandler().donation + Main.getColorHandler().message + "Donation removed " + String.valueOf(args[3]) + " by " + player.getName());
 			

@@ -45,6 +45,15 @@ public class PlayerChats implements Listener {
 			}
 			return;
 		}
+
+		if(player.getWorld().getName().equalsIgnoreCase("SMP")) {
+			if(Main.getPlayerHandler(player).getRank() < 8) {
+				event.setFormat(ChatColor.DARK_GRAY + "[SMP] " + ChatColor.WHITE + Main.getPlayerHandler(player).getNickname() + ChatColor.GRAY + ": " + event.getMessage().replaceFirst("%", "%%"));
+				return;
+			}
+			event.setFormat(Main.getPlayerHandler(player).rankToString() + Main.getPlayerHandler(player).getNickname() + ChatColor.GRAY + ": " + event.getMessage().replaceFirst("%", "%%"));
+			return;
+		}
 		
 		long elapsedTime = System.currentTimeMillis() - Main.getPlayerHandler(player).getMuteDate();
 		long timeUntilReuse = ((24*60*60*1000) - elapsedTime);
@@ -57,14 +66,14 @@ public class PlayerChats implements Listener {
 		}else if(Main.getPlayerHandler(player).getFilter() == 0) {
 			String[] badWords = {"fuck", "shit", "nigger", "cunt", "bitch", "gay", "chink", "dyke", "pussy", "penis", "sex", "dick", "porn", "nigga", "ass", "whore", "tit", "cum", "wanker", "prick"};
 
-			for(String word : badWords) {
+		/*	for(String word : badWords) {
 				StringBuilder string = new StringBuilder();
 				for (int x = 0; x < word.length(); x++) {
 					string.append("*");
 				}
 				message = message.replaceAll(word, string.toString());
-			}
-			event.setFormat(Main.getPlayerHandler(player).rankToString() + Main.getPlayerHandler(player).getNickname() + ChatColor.GRAY + ": " + message);
+			} */
+			event.setFormat(Main.getPlayerHandler(player).rankToString() + Main.getPlayerHandler(player).getNickname() + ChatColor.GRAY + ": " + message.replaceFirst("%", "%%"));
 			return;
 		}
 		event.setFormat(Main.getPlayerHandler(player).rankToString() + Main.getPlayerHandler(player).getNickname() + ChatColor.GRAY + ": " + event.getMessage().replaceFirst("%", "%%"));
