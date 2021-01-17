@@ -62,11 +62,7 @@ public class Main extends JavaPlugin {
 		infoHandler = new InfoHandler();
 		redstoneLimit = new RedstoneLimit();
 
-		Bukkit.getServer().getPluginManager().registerEvents(new CommandWild(), this);
-		WorldCreator worldCreator = new WorldCreator("SMP");
-		worldCreator.generateStructures(false);
-		worldCreator.type(WorldType.NORMAL);
-		Bukkit.createWorld(worldCreator);
+
 	}
 
 	public static Main getInstance() {

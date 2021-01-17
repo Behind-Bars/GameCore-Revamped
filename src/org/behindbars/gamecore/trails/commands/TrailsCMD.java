@@ -39,6 +39,7 @@ public class TrailsCMD extends Command {
 				player.sendMessage(Main.getColorHandler().noPermission);
 			}else {
 				TrailsGUI menu = new TrailsGUI();
+				menu.register();
 				menu.openInventory(player);
 			}
 		}else if(args.length == 1) {

@@ -34,10 +34,12 @@ public class RenameCMD extends Command {
 	public boolean execute(CommandSender sender, String commandLabel, String[] args) {
 		if (sender instanceof ConsoleCommandSender) return true;
 		Player player = (Player) sender;
+
 		if(args.length == 0) {
 			player.sendMessage(Main.getColorHandler().usage + "/rename <name>");
 			return true;
 		}
+
 		if(Main.getPlayerHandler(player).getRank() < 10) {
             player.sendMessage(Main.getColorHandler().noPermission);
         }else {
@@ -46,7 +48,7 @@ public class RenameCMD extends Command {
 	            player.sendMessage(Main.getColorHandler().error + "You do not have an item in your hand!");
 	        }else {
 		        ItemMeta im = inhand.getItemMeta();
-		        im.setDisplayName(args[1].replaceAll("_", " "));
+		        im.setDisplayName(args[0].replaceAll("_", " "));
 		        inhand.setItemMeta(im);
 		        player.getInventory().setItemInMainHand(inhand);
 	        }

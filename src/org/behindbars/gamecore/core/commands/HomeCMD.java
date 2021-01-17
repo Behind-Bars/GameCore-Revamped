@@ -39,7 +39,7 @@ public class HomeCMD extends Command {
 		}
 		
 		if (args[0].equalsIgnoreCase("set")) {
-			if (Main.getPlayerHandler(player).getRank() < 1) {
+			if (Main.getPlayerHandler(player).getRank() < -1) {
 				player.sendMessage(Main.getColorHandler().noPermission);
 			}else if (!(args.length == 2)) {
 				player.sendMessage(Main.getColorHandler().usage + "/home set <home>");
@@ -49,7 +49,7 @@ public class HomeCMD extends Command {
 				Main.getPlayerHandler(player).setHome(args[1].toUpperCase());
 			}
 		}else if (args[0].equalsIgnoreCase("delete")) {
-			if (Main.getPlayerHandler(player).getRank() < 1) {
+			if (Main.getPlayerHandler(player).getRank() < -1) {
 				player.sendMessage(Main.getColorHandler().noPermission);
 			}else if (!(args.length == 2)) {
 				player.sendMessage(Main.getColorHandler().usage + "/home delete <home>");
@@ -57,13 +57,13 @@ public class HomeCMD extends Command {
 				Main.getPlayerHandler(player).delHome(args[1].toUpperCase());
 			}
 		}else if (args[0].equalsIgnoreCase("list")) {
-			if (Main.getPlayerHandler(player).getRank() < 1) {
+			if (Main.getPlayerHandler(player).getRank() < -1) {
 				player.sendMessage(Main.getColorHandler().noPermission);
 			}else {
 				Main.getPlayerHandler(player).getHomeList();
 			}
 		}else {
-			if (Main.getPlayerHandler(player).getRank() < 1) {
+			if (Main.getPlayerHandler(player).getRank() < -1) {
 				player.sendMessage(Main.getColorHandler().noPermission);
 			}else if (!(args.length == 1)) {
 				player.sendMessage(Main.getColorHandler().usage + "/home <name>");

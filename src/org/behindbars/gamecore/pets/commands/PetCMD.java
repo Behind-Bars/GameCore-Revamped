@@ -45,7 +45,7 @@ public class PetCMD extends Command {
 		
 		if(playerHandler.getDonateFeed() == 0) {
             player.sendMessage(Main.getColorHandler().noPermission);
-        }else if(args.length != 2) {
+        }else if(args.length != 1) {
             player.sendMessage(Main.getColorHandler().donation + "/pet <type>");
             player.sendMessage(Main.getColorHandler().donation + "Available Pets: Creeper, Skeleton, Polarbear, Chicken, Rabbit, Wolf, Turtle, Parrot, Pig, Sheep, Ocelot, Fox, Spider, Zombie, Bee");
         } else {

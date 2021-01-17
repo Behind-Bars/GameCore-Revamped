@@ -22,7 +22,7 @@ public class BroadcastCMD extends Command {
 	private static String name = "broadcast";
 	private static String description = "broadcast a message to the entire server";
 	private static String usageMessage = "";
-	private static List<String> aliases = Arrays.asList("");
+	private static List<String> aliases = Arrays.asList("bc");
 	
 	public BroadcastCMD() {
 		super(name, description, usageMessage, aliases);

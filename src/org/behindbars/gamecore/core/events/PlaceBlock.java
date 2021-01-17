@@ -128,15 +128,9 @@ public class PlaceBlock implements Listener {
 		return true;
 	}
 
-	public void onPortal(PlayerPortalEvent event) {
-		event.setCanCreatePortal(false);
-		event.setCancelled(true);
-		return;
-	}
-	public void onPortal(PortalCreateEvent event) {
-		event.setCancelled(true);
-		return;
-	}
+
+
+
 	public static boolean isSafeLocation(Location location) {
 		Block feet = location.getBlock();
 		if (!feet.getType().isTransparent() && !feet.getLocation().add(0, 1, 0).getBlock().getType().isTransparent()) {

@@ -41,17 +41,30 @@ public class KitCMD extends Command {
 		if (!(args.length == 1)) {
             player.sendMessage(Main.getColorHandler().usage + "/kit <name>");
         }else if(args[0].equalsIgnoreCase("tools")) {
-            long elapsedTime = System.currentTimeMillis() - Main.getPlayerHandler(player).getKitToolsDate();
-            long timeUntilReuse = ((24 * 60 * 60 * 1000) - elapsedTime);
-            
-            if (timeUntilReuse > 0) {
-                player.sendMessage(Main.getColorHandler().coolDown + Main.getTimeformatHandler().formatTime(timeUntilReuse));
-            }else {
-	            player.sendMessage(Main.getColorHandler().main + "Kit: " + Main.getColorHandler().message + "Received kit Tools!");
-	            Main.getPlayerHandler(player).setKitToolsDate();
-	            player.getInventory().addItem(new ItemStack(Material.IRON_PICKAXE));
-	            player.getInventory().addItem(new ItemStack(Material.IRON_AXE));
-            }
+			long elapsedTime = System.currentTimeMillis() - Main.getPlayerHandler(player).getKitToolsDate();
+			long timeUntilReuse = ((24 * 60 * 60 * 1000) - elapsedTime);
+
+			if (timeUntilReuse > 0) {
+				player.sendMessage(Main.getColorHandler().coolDown + Main.getTimeformatHandler().formatTime(timeUntilReuse));
+			} else {
+				player.sendMessage(Main.getColorHandler().main + "Kit: " + Main.getColorHandler().message + "Received kit Tools!");
+				Main.getPlayerHandler(player).setKitToolsDate();
+				player.getInventory().addItem(new ItemStack(Material.IRON_PICKAXE));
+				player.getInventory().addItem(new ItemStack(Material.IRON_AXE));
+			}
+
+		}else if(args[0].equalsIgnoreCase("food")) {
+			long elapsedTime = System.currentTimeMillis() - Main.getPlayerHandler(player).getKitToolsDate();
+			long timeUntilReuse = ((24 * 60 * 60 * 1000) - elapsedTime);
+
+			if (timeUntilReuse > 0) {
+				player.sendMessage(Main.getColorHandler().coolDown + Main.getTimeformatHandler().formatTime(timeUntilReuse));
+			}else {
+				player.sendMessage(Main.getColorHandler().main + "Kit: " + Main.getColorHandler().message + "Received kit Tools!");
+				Main.getPlayerHandler(player).setKitToolsDate();
+				player.getInventory().addItem(new ItemStack(Material.IRON_PICKAXE));
+				player.getInventory().addItem(new ItemStack(Material.IRON_AXE));
+			}
 
         }else if(args[0].equalsIgnoreCase("guard")) {
 
@@ -146,7 +159,7 @@ public class KitCMD extends Command {
 	@Override
 	public List<String> tabComplete(CommandSender sender, String alias, String[] args) {
 		List<String> list = new ArrayList<>();
-		if(args.length == 1) list.addAll(Arrays.asList("list", "guard", "tools"));
+		if(args.length == 1) list.addAll(Arrays.asList("list", "guard", "tools", "kit"));
 		return list;
 	}
 
