@@ -6,16 +6,14 @@ Discord: XenoPyax#5647
 
 package org.behindbars.gamecore.core.handlers;
 
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 
 import org.behindbars.gamecore.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import io.github.xenopyax.xenoapi.api.Config;
@@ -31,6 +29,10 @@ public class PlayerHandler {
 	public PlayerHandler(Player player) {
 		config = Main.getXenoAPI().getConfigManager().getNewConfig("/PlayerData/" + player.getUniqueId().toString() + ".config");
 		this.player = player;
+	}
+	
+	public void sync(UUID uuid) {
+		player = Bukkit.getPlayer(uuid);
 	}
 	
 	public boolean isSetup() {
@@ -319,7 +321,6 @@ public class PlayerHandler {
 				str.append(ChatColor.GOLD + "," + ChatColor.YELLOW+ " ");
 			}
 			str.append(string);
-
 		}
 		player.sendMessage(Main.getColorHandler().warp + "ALL Homes:");
 		player.sendMessage(ChatColor.YELLOW + str.toString());

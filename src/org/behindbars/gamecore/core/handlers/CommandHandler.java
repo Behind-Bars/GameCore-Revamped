@@ -34,7 +34,7 @@ public class CommandHandler {
 	public CommandHandler() {
 		setupCommandMap();
 		registerCommands();
-		regiserOverrideCommands();
+		registerOverrideCommands();
 	}
 	
 	private void setupCommandMap() {  
@@ -59,7 +59,7 @@ public class CommandHandler {
 				new WildCMD(), new NetherCMD(), new TpaCMD());
 	}
 	
-	private void regiserOverrideCommands() {
+	private void registerOverrideCommands() {
 		GamemodeCMD gmcmd = new GamemodeCMD();
 		Main.getInstance().getCommand("gamemode").setExecutor(gmcmd);
 		Main.getInstance().getCommand("gamemode").setTabCompleter(gmcmd);

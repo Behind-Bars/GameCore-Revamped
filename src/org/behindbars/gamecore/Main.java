@@ -89,6 +89,10 @@ public class Main extends JavaPlugin {
 		return announcer;
 	}
 	
+	public static Map<UUID, PlayerHandler> getHandlers() {
+		return handlers;
+	}
+	
 	public static PlayerHandler getPlayerHandler(Player player) {
 		if(handlers.containsKey(player.getUniqueId())) return handlers.get(player.getUniqueId());
 		PlayerHandler playerHandler = new PlayerHandler(player);
