@@ -1,9 +1,9 @@
 package org.behindbars.gamecore.core.commands.smp;
 
-import org.behindbars.gamecore.Main;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
@@ -36,7 +36,11 @@ public class WildCMD extends Command {
         }
 
         player.sendMessage(org.bukkit.ChatColor.DARK_RED + "Wild: " + ChatColor.RED + "Teleporting to a random location!");
-        player.teleport(getRandomLoc(40000, -40000, 40000, -40000, player.getWorld()));
+        Location loc = getRandomLoc(40000, -40000, 40000, -40000, player.getWorld());
+        loc.getChunk().load(true);
+        if(loc.getChunk().load()) {
+        	player.teleport(loc);
+        }
 
 
         return true;
@@ -48,17 +52,30 @@ public class WildCMD extends Command {
         return list;
     }
 
-    public Location getRandomLoc(int xmax, int xmin, int zmax, int zmin, World w){
-
+    public Location getRandomLoc(int xmax, int xmin, int zmax, int zmin, World w) {
         Random r = new Random();
         double x = r.nextInt(xmax - xmin) + xmin + 1.0;
         double z = r.nextInt(zmax-zmin) + zmin + 1.0;
         double y = w.getHighestBlockYAt((int) x, (int) z) + 1.0;
-
-        return new Location(w, x, y, z);
-
-
-
+        Location loc = new Location(w, x, y, z);
+        if(isBlockSafe(loc.getBlock())) return loc;        
+        return getRandomLoc(xmax, xmin, zmax, zmin, w);
     }
+    
+    private boolean isBlockSafe(Block block) {
+		switch(block.getType()) {
+		case LAVA:
+		case WATER:
+		case MAGMA_BLOCK:
+		case CACTUS:
+		case FIRE:
+		case SWEET_BERRY_BUSH:
+		case CAMPFIRE:
+		case KELP:
+			return false;
+		default:
+			return true;
+		}
+	}
 
 }

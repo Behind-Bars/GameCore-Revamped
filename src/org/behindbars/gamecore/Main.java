@@ -20,10 +20,6 @@ import org.behindbars.gamecore.core.handlers.PlayerHandler;
 import org.behindbars.gamecore.core.handlers.WarpHandler;
 import org.behindbars.gamecore.core.util.RedstoneLimit;
 import org.behindbars.gamecore.core.util.TimeFormatHandler;
-import org.behindbars.gamecore.smp.CommandWild;
-import org.bukkit.Bukkit;
-import org.bukkit.WorldCreator;
-import org.bukkit.WorldType;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -61,8 +57,6 @@ public class Main extends JavaPlugin {
 		warpHandler = new WarpHandler();
 		infoHandler = new InfoHandler();
 		redstoneLimit = new RedstoneLimit();
-
-
 	}
 
 	public static Main getInstance() {

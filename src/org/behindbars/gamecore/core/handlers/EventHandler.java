@@ -22,6 +22,7 @@ import org.behindbars.gamecore.core.events.PlayerJoin;
 import org.behindbars.gamecore.core.events.PlayerLeave;
 import org.behindbars.gamecore.core.events.PlayerMove;
 import org.behindbars.gamecore.core.events.PlayerRespawn;
+import org.behindbars.gamecore.core.events.PortalEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
@@ -43,6 +44,6 @@ public class EventHandler {
 
 	private void registerEvents() {
 		registerEvent(new BlockBreak(), new CraftItem(), new PlayerBlockPhysics(), new PlayerJoin(), new PlayerLeave(), new PlaceBlock(), new PlayerChats(), new PlayerRespawn(), new EntityAttackEntity(),
-				new EntityDeath(), new PlayerInteractSignChange(), new InventoryClick(), new PlayerMove(), new PickupItem(), new PlayerInteractEntity());
+				new EntityDeath(), new PlayerInteractSignChange(), new InventoryClick(), new PlayerMove(), new PickupItem(), new PlayerInteractEntity(), new PortalEvent());
 	}
 }

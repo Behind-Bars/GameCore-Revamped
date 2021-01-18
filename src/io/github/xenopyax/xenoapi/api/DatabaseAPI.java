@@ -60,7 +60,7 @@ public class DatabaseAPI {
 	 * @param database the database
 	 * @param username the username
 	 * @param password the password
-	 * @return true, if is database stored
+	 * @return true, if database is stored
 	 */
 	private boolean isDatabaseStored(String address, int port, String database, String username, String password) {
 		for(Database db : databases) {

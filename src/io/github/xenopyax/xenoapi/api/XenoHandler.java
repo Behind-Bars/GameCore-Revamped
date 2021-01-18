@@ -6,7 +6,6 @@ Discord: XenoPyax#5647
 
 package io.github.xenopyax.xenoapi.api;
 
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
 // TODO: Auto-generated Javadoc
@@ -62,16 +61,6 @@ public class XenoHandler {
 	 */
 	public ConfigManager getConfigManager() {
 		return new ConfigManager(plugin);
-	}
-	
-	/**
-	 * Gets the scoreboard.
-	 *
-	 * @param player the player
-	 * @return the scoreboard
-	 */
-	public FastBoard getScoreboard(Player player) {
-		return new FastBoard(player);
 	}
 
 }
