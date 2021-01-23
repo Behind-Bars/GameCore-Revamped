@@ -11,6 +11,7 @@ import org.behindbars.gamecore.core.util.GUI;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.WorldCreator;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -26,6 +27,9 @@ public class PlayerJoin implements Listener {
 	@EventHandler
 	public void onJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
+		if(new WorldCreator("SMP").createWorld() != null) {
+			player.teleport(Bukkit.getWorld("SMP").getSpawnLocation());
+		}
 		player.addAttachment(Main.getInstance()).setPermission("worldedit.wand", true);
 		if(Main.getHandlers().containsKey(player.getUniqueId())) Main.getHandlers().get(player.getUniqueId()).sync(player.getUniqueId());
 		if(!Main.getPlayerHandler(player).isSetup()) Main.getPlayerHandler(player).setupPlayer();
