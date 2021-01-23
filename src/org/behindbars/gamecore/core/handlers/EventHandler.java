@@ -22,7 +22,7 @@ import org.behindbars.gamecore.core.events.PlayerJoin;
 import org.behindbars.gamecore.core.events.PlayerLeave;
 import org.behindbars.gamecore.core.events.PlayerMove;
 import org.behindbars.gamecore.core.events.PlayerRespawn;
-import org.behindbars.gamecore.core.events.PortalEvent;
+import org.behindbars.gamecore.smp.PortalEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;

@@ -330,15 +330,18 @@ public class PlayerHandler {
 	public long getMuteDate() {
 		return config.getLong("Punish.Mute");
 	}
+	
 	public String getMutedReason() {
 		return config.getString("Punish.muteReason");
 	}
+	
 	public boolean setMuteDate(String reason) {
 		config.set("Punish.Mute", System.currentTimeMillis());
 		config.set("Punish.muteReason", reason);
 		config.saveConfig();
 		return true;
 	}
+	
 	public boolean removeMute() {
 		config.set("Punish.Mute", null);
 		config.set("Punish.muteReason", null);

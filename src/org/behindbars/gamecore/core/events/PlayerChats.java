@@ -12,10 +12,18 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
 import net.md_5.bungee.api.ChatColor;
 
 public class PlayerChats implements Listener {
+	
+	@EventHandler
+	public void onCmd(PlayerCommandPreprocessEvent e) {
+		System.out.println(e.getMessage().split(" ")[0]);
+		if(e.getMessage().split(" ")[0].equalsIgnoreCase("/me")) e.setCancelled(true);
+		if(e.getMessage().split(" ")[0].equalsIgnoreCase("/minecraft:me")) e.setCancelled(true);
+	}
 	
 	@EventHandler
 	public void chat(AsyncPlayerChatEvent event) {

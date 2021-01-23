@@ -22,6 +22,7 @@ import org.behindbars.gamecore.economy.commands.EconomyCMD;
 import org.behindbars.gamecore.economy.commands.MoneyCMD;
 import org.behindbars.gamecore.killstreak.KillstreakCMD;
 import org.behindbars.gamecore.pets.commands.PetCMD;
+import org.behindbars.gamecore.smp.EndCMD;
 import org.behindbars.gamecore.trails.commands.TrailsCMD;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -48,15 +49,15 @@ public class CommandHandler {
 	}
 	
 	private void registerCommands() {
-		registerCommand(new BroadcastCMD(), new CraftCMD(), new DiscoArmorCMD(), new EventCMD(), new FeedCMD(), new HatCMD(), new MoneyCMD(), new EconomyCMD(),
+		registerCommand(new InvSeeCMD(), new BroadcastCMD(), new CraftCMD(), new DiscoArmorCMD(), new EventCMD(), new FeedCMD(), new HatCMD(), new MoneyCMD(), new EconomyCMD(),
 				new NamecolorCDM(), new NicknameCMD() , new NickRGBCMD(), new PetCMD(), new PvPCMD(), new SellCMD(), new SpawnCMD(), new TrailsCMD(), new ClearChatCMD(), new ClearLagCMD(),
 				new DisposeCMD(), new DonationPointCMD(), new FlyCMD(), new PlayerHeadCMD(), new RankCMD(), new RankupCMD(), new RenameCMD(),
 				new SetupMapCMD(), new SpeedCMD(), new TeleportCMD(), new TokenCMD(), new TokenShopCMD(), new TokenEconomyCMD(), new VanishCMD(), new WorldCMD(),
 				new HomeCMD(), new BountyCMD(), new FilterCMD(), new HelpCMD(), new KitCMD(), new ListCMD(), new PayCMD(), new PrivateMessageCM(), new ReplyCMD(),
 				new ReferCMD(), new RulesCMD(), new ScoreboardToggle(), new StatsCMD(), new SuicideCMD(), new ContrabandCMD(), new JailCMD(), new UnjailCMD(), new BailCMD(),
-				new MuteCMD(), new BanCMD(), new UnbanCMD(), new TempbanCMD(), new KickCMD(), new WarnCMD(), new DonationCMD(), new BuyCMD(), new DonationAdminCMD(),
+				new BanCMD(), new UnbanCMD(), new TempbanCMD(), new KickCMD(), new WarnCMD(), new DonationCMD(), new BuyCMD(), new DonationAdminCMD(),
 				new KillstreakCMD(), new WarpCMD(), new VoteCMD(), new VoteAdminCMD(), new KillstreakCMD(), new SellCMD(), new SpawnCMD(), new AdminCMD(), new TpaAcceptCMD(),
-				new WildCMD(), new NetherCMD(), new TpaCMD());
+				new WildCMD(), new NetherCMD(), new TpaCMD(), new EndCMD());
 	}
 	
 	private void registerOverrideCommands() {

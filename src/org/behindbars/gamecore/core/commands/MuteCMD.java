@@ -36,9 +36,9 @@ public class MuteCMD extends Command {
 		if (Main.getPlayerHandler(player).getRank() < 8) {
             player.sendMessage(Main.getColorHandler().noPermission);
         }else if (args.length < 3) {
-            player.sendMessage(Main.getColorHandler().usage + args[0] + " <player> <reason>");
+            player.sendMessage(Main.getColorHandler().usage + "/mute <player> <reason>");
         } else {
-	        Player target = Bukkit.getPlayerExact(args[1]);
+	        Player target = Bukkit.getPlayerExact(args[0]);
 	        
 	        if (target == null) {
 	            player.sendMessage(Main.getColorHandler().offlinePlayer);
