@@ -13,7 +13,7 @@ import net.md_5.bungee.api.ChatColor;
 
 public class Announcer {
 	
-	private final String[] messages = {"You can now visit our website at: \n http://play.behind-bars.org", "Hello", "This is the auto broadcaster"};
+	private final String[] messages = {"You can now visit our website at: \n http://play.behind-bars.org", "Hellos", "This is the auto broadcaster"};
     private final String broadcastPrefix = ChatColor.RED + ChatColor.BOLD.toString() + ">> " + ChatColor.WHITE + ChatColor.ITALIC.toString();
 
     public Announcer() {
