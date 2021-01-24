@@ -58,6 +58,7 @@ public class PlayerHandler {
 		config.set("General.Bounty", Integer.valueOf(0));
 		config.set("General.acceptRules", Integer.valueOf(0));
 		config.set("General.Filter", Integer.valueOf(0));
+		config.set("General.Seen", Integer.valueOf(0));
 
 
 		config.set("Punish.Mute", "");
@@ -751,6 +752,16 @@ public class PlayerHandler {
 
 	public String getNickname() {
 		return config.getString("Donate.Nickname");
+	}
+
+	public boolean setSeen(String name) {
+		config.set("General.Seen", name);
+		config.saveConfig();
+		return true;
+	}
+
+	public String getSeen() {
+		return config.getString("General.Seen");
 	}
 
 	public int getToken() {
