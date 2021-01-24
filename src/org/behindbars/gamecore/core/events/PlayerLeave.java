@@ -28,12 +28,13 @@ public class PlayerLeave implements Listener {
 	public void onLeave(PlayerQuitEvent event) {
 		Player player = event.getPlayer();
 
-		if(Main.getPlayerHandler(player).getCombatLogTime() > 0) {
-			/*Bukkit.getServer().broadcastMessage(Main.getColorHandler().main + "CombatLog: " + Main.getColorHandler().message + player.getName()
+		if(Main.getPlayerHandler(player).getCombatLogTime() > System.currentTimeMillis()) {
+			Bukkit.getServer().broadcastMessage(Main.getColorHandler().main + "CombatLog: " + Main.getColorHandler().message + player.getName()
 				+ " has combat logged at location" + ChatColor.GRAY + " (" + player.getLocation().getBlockX() + "x " + player.getLocation().getBlockY() + "y " 
 				+ player.getLocation().getBlockZ() + "z)" + Main.getColorHandler().message + "!");
-			//player.setHealth(0);*/
+			player.setHealth(0);
 		}
+		
 		Date now = new Date();
 		SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 

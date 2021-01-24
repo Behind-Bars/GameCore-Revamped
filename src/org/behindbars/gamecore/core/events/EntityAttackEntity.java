@@ -7,6 +7,7 @@ Discord: XenoPyax#5647
 package org.behindbars.gamecore.core.events;
 
 import org.behindbars.gamecore.Main;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -32,6 +33,17 @@ public class EntityAttackEntity implements Listener {
 
 			Main.getPlayerHandler(damaged).setCombatLogTime(10);
 			Main.getPlayerHandler(damager).setCombatLogTime(10);
+			damager.setGlowing(true);
+			damaged.setGlowing(true);
+			
+			Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
+				
+				@Override
+				public void run() {
+					if(Main.getPlayerHandler(damager).getCombatLogTime() > System.currentTimeMillis()) damager.setGlowing(false);
+					if(Main.getPlayerHandler(damaged).getCombatLogTime() > System.currentTimeMillis()) damaged.setGlowing(false);
+				}
+			}, 11*1000);
 
 			if(Main.getPlayerHandler(damaged).getPvpStatus() == 1) {
 				event.setCancelled(true);
