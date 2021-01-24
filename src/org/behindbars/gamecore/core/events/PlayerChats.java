@@ -24,7 +24,11 @@ public class PlayerChats implements Listener {
 		if(e.getMessage().split(" ")[0].equalsIgnoreCase("/me")) e.setCancelled(true);
 		if(e.getMessage().split(" ")[0].equalsIgnoreCase("/minecraft:me")) e.setCancelled(true);
 	}
-	
+
+	String guardChat = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_BLUE + "Guard Chat" + ChatColor.DARK_GRAY + "] ";
+	String modChat = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_RED + "Mod Chat" + ChatColor.DARK_GRAY + "] ";
+
+
 	@EventHandler
 	public void chat(AsyncPlayerChatEvent event) {
 		Player player = event.getPlayer();
@@ -38,16 +42,16 @@ public class PlayerChats implements Listener {
 			event.setCancelled(true);
 			for(Player online : Bukkit.getOnlinePlayers()) {
 				if(Main.getPlayerHandler(online).getRank() > 5) {
-					online.sendMessage(Main.getColorHandler().main + "(GuardChat) " + Main.getColorHandler().message + player.getName() + Main.getColorHandler().main + ": " + Main.getColorHandler().message 
+					online.sendMessage(guardChat + Main.getColorHandler().message + player.getName() + Main.getColorHandler().main + ": " + Main.getColorHandler().message
 							+ event.getMessage().replaceFirst("#", ""));
 				}
 			}
 			return;
-		}else if(Main.getPlayerHandler(player).getRank() > 7 && message.startsWith("!")) {
+		}else if(Main.getPlayerHandler(player).getRank() > 7 && (message.startsWith("@") || message.startsWith("!"))) {
 			event.setCancelled(true);
 			for(Player online : Bukkit.getOnlinePlayers()) {
 				if(Main.getPlayerHandler(online).getRank() > 7) {
-					online.sendMessage(Main.getColorHandler().main + "(ModChat) " + Main.getColorHandler().message + player.getName() + Main.getColorHandler().main + ": " + Main.getColorHandler().message 
+					online.sendMessage(modChat + Main.getColorHandler().message + player.getName() + Main.getColorHandler().main + ": " + Main.getColorHandler().message
 							+ event.getMessage().replaceFirst("!", ""));
 				}
 			}

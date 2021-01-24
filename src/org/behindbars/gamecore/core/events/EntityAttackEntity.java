@@ -30,8 +30,8 @@ public class EntityAttackEntity implements Listener {
 				return;
 			}
 
-			Main.getPlayerHandler(damaged).setCombatLogTime(5);
-			Main.getPlayerHandler(damager).setCombatLogTime(5);
+			Main.getPlayerHandler(damaged).setCombatLogTime(10);
+			Main.getPlayerHandler(damager).setCombatLogTime(10);
 
 			if(Main.getPlayerHandler(damaged).getPvpStatus() == 1) {
 				event.setCancelled(true);

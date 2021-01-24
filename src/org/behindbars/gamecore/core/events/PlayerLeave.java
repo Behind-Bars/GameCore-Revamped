@@ -6,6 +6,8 @@ Discord: XenoPyax#5647
 
 package org.behindbars.gamecore.core.events;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.behindbars.gamecore.Main;
@@ -32,7 +34,12 @@ public class PlayerLeave implements Listener {
 				+ player.getLocation().getBlockZ() + "z)" + Main.getColorHandler().message + "!");
 			//player.setHealth(0);*/
 		}
+		Date now = new Date();
+		SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+
+
 		event.setQuitMessage(ChatColor.RED + ChatColor.BOLD.toString() + "- " + ChatColor.GRAY + event.getPlayer().getName());
+		Main.getPlayerHandler(player).setSeen(format.format(now));
 
 		World world = player.getWorld();
 		List<Entity> entList = world.getEntities();
