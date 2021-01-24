@@ -27,7 +27,9 @@ public class PlayerLeave implements Listener {
 	@EventHandler
 	public void onLeave(PlayerQuitEvent event) {
 		Player player = event.getPlayer();
-
+		
+		player.setGlowing(true);
+		
 		if(Main.getPlayerHandler(player).getCombatLogTime() > System.currentTimeMillis()) {
 			Bukkit.getServer().broadcastMessage(Main.getColorHandler().main + "CombatLog: " + Main.getColorHandler().message + player.getName()
 				+ " has combat logged at location" + ChatColor.GRAY + " (" + player.getLocation().getBlockX() + "x " + player.getLocation().getBlockY() + "y " 

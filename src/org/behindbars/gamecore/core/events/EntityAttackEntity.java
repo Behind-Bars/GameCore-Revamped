@@ -7,11 +7,13 @@ Discord: XenoPyax#5647
 package org.behindbars.gamecore.core.events;
 
 import org.behindbars.gamecore.Main;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 
 public class EntityAttackEntity implements Listener {
 
@@ -21,29 +23,20 @@ public class EntityAttackEntity implements Listener {
 			Player damaged = (Player) event.getEntity();
 			Player damager = (Player) event.getDamager();
 
-			if(Main.getPlayerHandler(damaged).getAcceptRules() == 0) {
+			/*if(Main.getPlayerHandler(damaged).getAcceptRules() == 0) {
 				event.setCancelled(true);
 				damager.sendMessage(Main.getColorHandler().error + "This player has their pvp disabled!");
 				return;
-			}
-
+			}*/
+			
 			if(event.isCancelled()) {
 				return;
 			}
-
+			
 			Main.getPlayerHandler(damaged).setCombatLogTime(10);
 			Main.getPlayerHandler(damager).setCombatLogTime(10);
-			damager.setGlowing(true);
-			damaged.setGlowing(true);
-			
-			Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
-				
-				@Override
-				public void run() {
-					if(Main.getPlayerHandler(damager).getCombatLogTime() > System.currentTimeMillis()) damager.setGlowing(false);
-					if(Main.getPlayerHandler(damaged).getCombatLogTime() > System.currentTimeMillis()) damaged.setGlowing(false);
-				}
-			}, 11*1000);
+			damaged.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("§c§lYou've entered combat"));
+			damager.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("§c§lYou've entered combat"));
 
 			if(Main.getPlayerHandler(damaged).getPvpStatus() == 1) {
 				event.setCancelled(true);

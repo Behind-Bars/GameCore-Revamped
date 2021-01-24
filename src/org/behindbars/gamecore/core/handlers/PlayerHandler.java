@@ -179,7 +179,7 @@ public class PlayerHandler {
 	}
 
 	public boolean setCombatLogTime(int num) {
-		config.set("Killstreak.combatLog", (num* 1000)+System.currentTimeMillis());
+		config.set("Killstreak.combatLog", num);
 		config.saveConfig();
 		return true;
 	}
