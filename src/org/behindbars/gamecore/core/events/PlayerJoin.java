@@ -30,7 +30,7 @@ public class PlayerJoin implements Listener {
 		if(new WorldCreator("SMP").createWorld() != null) {
 			player.teleport(Bukkit.getWorld("SMP").getSpawnLocation());
 		}
-		player.addAttachment(Main.getInstance()).setPermission("worldedit.wand", true);
+		player.addAttachment(Main.getInstance()).setPermission("worldedit.selection.pos", true);
 		if(Main.getHandlers().containsKey(player.getUniqueId())) Main.getHandlers().get(player.getUniqueId()).sync(player.getUniqueId());
 		if(!Main.getPlayerHandler(player).isSetup()) Main.getPlayerHandler(player).setupPlayer();
 		player.setCustomName(Main.getPlayerHandler(player).rankToString() + Main.getPlayerHandler(player).getNickname());
