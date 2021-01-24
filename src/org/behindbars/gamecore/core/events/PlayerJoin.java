@@ -36,7 +36,7 @@ public class PlayerJoin implements Listener {
 		player.setCustomName(Main.getPlayerHandler(player).rankToString() + Main.getPlayerHandler(player).getNickname());
 		player.setPlayerListName(Main.getPlayerHandler(player).rankToString() + Main.getPlayerHandler(player).getNickname());
 		player.setWalkSpeed(0.2f);
-		player.setFlySpeed(0.2f);
+		player.setFlySpeed(0.1f);
 
 
 		player.setGameMode(GameMode.SURVIVAL);
