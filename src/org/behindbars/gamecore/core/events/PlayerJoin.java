@@ -27,11 +27,12 @@ public class PlayerJoin implements Listener {
 	@EventHandler
 	public void onJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
+		if(Main.getHandlers().containsKey(player.getUniqueId())) Main.getHandlers().get(player.getUniqueId()).sync(player.getUniqueId());
+		if(Main.getPlayerHandler(player).isBanned())  player.kickPlayer("§7Reason: §6" + Main.getPlayerHandler(player).getLastBanInfo().getReason() + "\n§7Victimizer: §6" + Main.getPlayerHandler(player).getLastBanInfo().getVictimizer());
 		if(new WorldCreator("SMP").createWorld() != null) {
 			player.teleport(Bukkit.getWorld("SMP").getSpawnLocation());
 		}
 		player.addAttachment(Main.getInstance()).setPermission("worldedit.selection.pos", true);
-		if(Main.getHandlers().containsKey(player.getUniqueId())) Main.getHandlers().get(player.getUniqueId()).sync(player.getUniqueId());
 		if(!Main.getPlayerHandler(player).isSetup()) Main.getPlayerHandler(player).setupPlayer();
 		player.setCustomName(Main.getPlayerHandler(player).rankToString() + Main.getPlayerHandler(player).getNickname());
 		player.setPlayerListName(Main.getPlayerHandler(player).rankToString() + Main.getPlayerHandler(player).getNickname());

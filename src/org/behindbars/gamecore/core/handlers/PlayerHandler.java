@@ -41,6 +41,15 @@ public class PlayerHandler {
 	}
 	
 	public void banPlayer(String reason, long time, Player victimizer) {
+		BanInfo info = getLastBanInfo();
+		if(info != null) {
+			if(info.getBannedTo() > System.currentTimeMillis()) {
+				victimizer.sendMessage("§4Already banned!");
+				return;
+			}else {
+				saveBanToHistory(info);
+			}
+		}
 		Connection con = Main.getDB().getConnection();
 		try {
 			PreparedStatement pstmt = con.prepareStatement("INSERT INTO bans (BanFrom, BanTo, Reason, Victimizer, Victim) VALUES (?, ?, ?, ?, ?);");
@@ -56,6 +65,35 @@ public class PlayerHandler {
 		}
 	}
 	
+	private void saveBanToHistory(BanInfo info) {
+		Connection con = Main.getDB().getConnection();
+		try {
+			PreparedStatement pstmt = con.prepareStatement("INSERT INTO ban_history (BanFrom, BanTo, Reason, Victimizer, Victim) VALUES (?, ?, ?, ?, ?);");
+			pstmt.setLong(1, info.getBannedFrom());
+			pstmt.setLong(2, info.getBannedTo());
+			pstmt.setString(3, info.getReason());
+			pstmt.setString(4, info.getVictimizer().toString());
+			pstmt.setString(5, info.getVictim().toString());
+			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		deleteLastBan(info.getVictim());
+	}
+
+	private void deleteLastBan(UUID victim) {
+		Connection con = Main.getDB().getConnection();
+		try {
+			PreparedStatement pstmt = con.prepareStatement("DELETE FROM bans WHERE Victim=?");
+			pstmt.setString(1, victim.toString());
+			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public BanInfo getLastBanInfo() {
 		Connection con = Main.getDB().getConnection();
 		try {
