@@ -28,6 +28,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import io.github.xenopyax.xenoapi.XenoAPI;
+import io.github.xenopyax.xenoapi.api.Database;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -45,7 +46,7 @@ public class Main extends JavaPlugin {
 	private static WarpHandler warpHandler;
 	private static InfoHandler infoHandler;
 	private static RedstoneLimit redstoneLimit;
-	
+	private static Database db;
 	private static XenoAPI api;
 	
 	private static Map<UUID, PlayerHandler> handlers = new HashMap<>();
@@ -55,6 +56,7 @@ public class Main extends JavaPlugin {
 		instance = this;
 		api = new XenoAPI(this);
 		
+		db = api.getDatabaeAPI().getDB("144.217.87.179", 3306, "behindbars_core", "xenopyax", "dbc4zCsWWeb7AXB8wp59c");
 		commandHandler = new CommandHandler();
 		eventHandler = new EventHandler();
 		colorHandler = new ColorHandler();
@@ -161,6 +163,10 @@ public class Main extends JavaPlugin {
 
 	public static RedstoneLimit getRedstoneLimit() {
 		return redstoneLimit;
+	}
+
+	public static Database getDB() {
+		return db;
 	}
 
 }

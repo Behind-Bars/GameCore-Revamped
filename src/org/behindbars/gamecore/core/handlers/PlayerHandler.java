@@ -6,11 +6,16 @@ Discord: XenoPyax#5647
 
 package org.behindbars.gamecore.core.handlers;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
 import org.behindbars.gamecore.Main;
+import org.behindbars.gamecore.core.data.BanInfo;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -33,6 +38,58 @@ public class PlayerHandler {
 	
 	public void sync(UUID uuid) {
 		player = Bukkit.getPlayer(uuid);
+	}
+	
+	public void banPlayer(String reason, long time, Player victimizer) {
+		Connection con = Main.getDB().getConnection();
+		try {
+			PreparedStatement pstmt = con.prepareStatement("INSERT INTO bans (BanFrom, BanTo, Reason, Victimizer, Victim) VALUES (?, ?, ?, ?, ?);");
+			pstmt.setLong(1, System.currentTimeMillis());
+			pstmt.setLong(2, time);
+			pstmt.setString(3, reason);
+			pstmt.setString(4, victimizer.getUniqueId().toString());
+			pstmt.setString(5, player.getUniqueId().toString());
+			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public BanInfo getLastBanInfo() {
+		Connection con = Main.getDB().getConnection();
+		try {
+			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM bans WHERE Victim=?;");
+			pstmt.setString(1, player.getUniqueId().toString());
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				String reason = rs.getString("Reason");
+				UUID victim = UUID.fromString(rs.getString("Victim"));
+				UUID victimizer = UUID.fromString(rs.getString("Victimizer"));
+				long bannedFrom = rs.getLong("BanFrom");
+				long bannedTo = rs.getLong("BanTo");
+				return new BanInfo(bannedFrom, bannedTo, victim, victimizer, reason);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public boolean isBanned() {
+		Connection con = Main.getDB().getConnection();
+		try {
+			PreparedStatement pstmt = con.prepareStatement("SELECT BanTo FROM bans WHERE Victim=?;");
+			pstmt.setString(1, player.getUniqueId().toString());
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				long bannedTo = rs.getLong("BanTo");
+				return bannedTo > System.currentTimeMillis() ? true : false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 	public boolean isSetup() {

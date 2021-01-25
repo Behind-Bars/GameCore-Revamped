@@ -55,7 +55,7 @@ public class CommandHandler {
 				new SetupMapCMD(), new SpeedCMD(), new TeleportCMD(), new TokenCMD(), new TokenShopCMD(), new TokenEconomyCMD(), new VanishCMD(), new WorldCMD(),
 				new HomeCMD(), new BountyCMD(), new FilterCMD(), new HelpCMD(), new KitCMD(), new ListCMD(), new PayCMD(), new PrivateMessageCM(), new ReplyCMD(),
 				new ReferCMD(), new RulesCMD(), new ScoreboardToggle(), new StatsCMD(), new SuicideCMD(), new ContrabandCMD(), new JailCMD(), new UnjailCMD(), new BailCMD(),
-				/*new BanCMD(),*/ new UnbanCMD(), new TempbanCMD(), new KickCMD(), new WarnCMD(), new DonationCMD(), new BuyCMD(), new DonationAdminCMD(),
+				new BanCMD(), new UnbanCMD(), new TempbanCMD(), new KickCMD(), new WarnCMD(), new DonationCMD(), new BuyCMD(), new DonationAdminCMD(),
 				new KillstreakCMD(), new WarpCMD(), new VoteCMD(), new VoteAdminCMD(), new KillstreakCMD(), new SellCMD(), new SpawnCMD(), new AdminCMD(), new TpaAcceptCMD(),
 				new WildCMD(), new NetherCMD(), new TpaCMD(), new EndCMD());
 	}
