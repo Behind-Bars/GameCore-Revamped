@@ -29,14 +29,14 @@ public class EntityAttackEntity implements Listener {
 				return;
 			}*/
 			
-			if(event.isCancelled()) {
-				return;
-			}
+			if(event.isCancelled()) return;
 			
 			Main.getPlayerHandler(damaged).setCombatLogTime(10);
 			Main.getPlayerHandler(damager).setCombatLogTime(10);
-			damaged.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("§c§lYou've entered combat"));
-			damager.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("§c§lYou've entered combat"));
+			damaged.setGlowing(true);
+			damager.setGlowing(true);
+			damaged.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("§c§lYou've entered combat"));
+			damager.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("§c§lYou've entered combat"));
 
 			if(Main.getPlayerHandler(damaged).getPvpStatus() == 1) {
 				event.setCancelled(true);

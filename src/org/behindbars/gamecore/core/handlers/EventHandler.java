@@ -8,6 +8,7 @@ package org.behindbars.gamecore.core.handlers;
 
 import org.behindbars.gamecore.Main;
 import org.behindbars.gamecore.core.events.BlockBreak;
+import org.behindbars.gamecore.core.events.CommandProcess;
 import org.behindbars.gamecore.core.events.CraftItem;
 import org.behindbars.gamecore.core.events.EntityAttackEntity;
 import org.behindbars.gamecore.core.events.EntityDeath;
@@ -43,7 +44,7 @@ public class EventHandler {
 	}
 
 	private void registerEvents() {
-		registerEvent(new BlockBreak(), new CraftItem(), new PlayerBlockPhysics(), new PlayerJoin(), new PlayerLeave(), new PlaceBlock(), new PlayerChats(), new PlayerRespawn(), new EntityAttackEntity(),
-				new EntityDeath(), new PlayerInteractSignChange(), new InventoryClick(), new PlayerMove(), new PickupItem(), new PlayerInteractEntity(), new PortalEvent());
+		registerEvent(new BlockBreak(), new CraftItem(), new PlayerBlockPhysics(), new PlayerJoin(), new PlayerLeave(), new PlaceBlock(), new PlayerChats(), new PlayerRespawn(), new CommandProcess(),
+				new EntityAttackEntity(), new EntityDeath(), new PlayerInteractSignChange(), new InventoryClick(), new PlayerMove(), new PickupItem(), new PlayerInteractEntity(), new PortalEvent());
 	}
 }

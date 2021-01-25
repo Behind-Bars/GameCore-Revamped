@@ -27,6 +27,7 @@ public class PlayerInteractEntity implements Listener {
 	@EventHandler
 	public void playerInteractCrate(PlayerInteractEntityEvent event) {
 		Player player = event.getPlayer();
+		System.out.println("ran");
 		if(event.getRightClicked().isCustomNameVisible()) {
 			if (event.getRightClicked().getCustomName().contains(event.getPlayer().getName() + "'s Pet")) {
 				event.getRightClicked().remove();

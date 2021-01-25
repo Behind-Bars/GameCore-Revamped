@@ -63,6 +63,7 @@ public class WildCMD extends Command {
     }
     
     private boolean isBlockSafe(Block block) {
+    	if(block == null) return false;
 		switch(block.getType()) {
 		case LAVA:
 		case WATER:
