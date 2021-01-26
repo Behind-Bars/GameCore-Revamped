@@ -11,6 +11,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.behindbars.gamecore.Main;
+import org.behindbars.gamecore.core.handlers.PlayerHandler;
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
@@ -32,7 +35,19 @@ public class UnbanCMD extends Command {
 		if (sender instanceof ConsoleCommandSender) return true;
 		Player player = (Player) sender;
 		
-		player.sendMessage(Main.getColorHandler().error + "Command is unimplemeted.");
+		if(args.length == 1) {
+			OfflinePlayer target = Bukkit.getOfflinePlayer(args[0]);
+			if(target == null) {
+				player.sendMessage("§c" + args[0] + " hasn't played on this server.");
+			}else {
+				if(PlayerHandler.isBanned(target.getUniqueId())) {
+					PlayerHandler.deleteLastBan(target.getUniqueId());
+					player.sendMessage("§a" + target.getName() + " has been unbanned.");
+				}else {
+					player.sendMessage("§c" + target.getName() + " is not banned.");
+				}
+			}
+		}
 		return true;
 	}
 
@@ -40,7 +55,6 @@ public class UnbanCMD extends Command {
 	public List<String> tabComplete(CommandSender sender, String alias, String[] args) {
 		List<String> list = new ArrayList<>();
 		if (sender instanceof ConsoleCommandSender) return list;
-		// Player player = (Player) sender;
 		return list;
 	}
 

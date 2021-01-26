@@ -52,11 +52,11 @@ public class CommandHandler {
 	private void registerCommands() {
 		registerCommand(new InvSeeCMD(), new BroadcastCMD(), new CraftCMD(), new DiscoArmorCMD(), new EventCMD(), new FeedCMD(), new HatCMD(), new MoneyCMD(), new EconomyCMD(),
 				new NamecolorCDM(), new NicknameCMD() , new NickRGBCMD(), new PetCMD(), new PvPCMD(), new SellCMD(), new SpawnCMD(), new TrailsCMD(), new ClearChatCMD(), new ClearLagCMD(),
-				new DisposeCMD(), new DonationPointCMD(), new FlyCMD(), new PlayerHeadCMD(), new RankCMD(), new RankupCMD(), new RenameCMD(),
+				new DisposeCMD(), new DonationPointCMD(), new FlyCMD(), new PlayerHeadCMD(), new RankCMD(), new RankupCMD(), new RenameCMD(), new MuteCMD(), new UnmutedCMD(),
 				new SetupMapCMD(), new SpeedCMD(), new TeleportCMD(), new TokenCMD(), new TokenShopCMD(), new TokenEconomyCMD(), new VanishCMD(), new WorldCMD(),
 				new HomeCMD(), new BountyCMD(), new FilterCMD(), new HelpCMD(), new KitCMD(), new ListCMD(), new PayCMD(), new PrivateMessageCM(), new ReplyCMD(),
-				new ReferCMD(), new RulesCMD(), new ScoreboardToggle(), new StatsCMD(), new SuicideCMD(), new ContrabandCMD(), new JailCMD(), new UnjailCMD(), new BailCMD(),
-				new BanCMD(), new UnbanCMD(), new TempbanCMD(), new KickCMD(), new WarnCMD(), new DonationCMD(), new BuyCMD(), new DonationAdminCMD(),
+				new UnbanCMD(), new ReferCMD(), new RulesCMD(), new ScoreboardToggle(), new StatsCMD(), new SuicideCMD(), new ContrabandCMD(), new JailCMD(), new UnjailCMD(), new BailCMD(),
+				new TempbanCMD(), new KickCMD(), new WarnCMD(), new DonationCMD(), new BuyCMD(), new DonationAdminCMD(),
 				new KillstreakCMD(), new WarpCMD(), new VoteCMD(), new VoteAdminCMD(), new KillstreakCMD(), new SellCMD(), new SpawnCMD(), new AdminCMD(), new TpaAcceptCMD(),
 				new WildCMD(), new NetherCMD(), new TpaCMD(), new EndCMD(), new SetupSMPCMD());
 	}
@@ -65,6 +65,9 @@ public class CommandHandler {
 		GamemodeCMD gmcmd = new GamemodeCMD();
 		Main.getInstance().getCommand("gamemode").setExecutor(gmcmd);
 		Main.getInstance().getCommand("gamemode").setTabCompleter(gmcmd);
+		BanCMD ban = new BanCMD();
+		Main.getInstance().getCommand("ban").setExecutor(ban);
+		Main.getInstance().getCommand("ban").setTabCompleter(ban);
 	}
 	
 	private void registerCommand(Command... commands) {

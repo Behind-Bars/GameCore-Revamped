@@ -10,8 +10,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
-
 import org.behindbars.gamecore.core.automation.Announcer;
 import org.behindbars.gamecore.core.handlers.ColorHandler;
 import org.behindbars.gamecore.core.handlers.CommandHandler;
@@ -29,7 +27,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import io.github.xenopyax.xenoapi.XenoAPI;
 import io.github.xenopyax.xenoapi.api.Database;
-import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 

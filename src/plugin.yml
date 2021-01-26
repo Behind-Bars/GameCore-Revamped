@@ -8,3 +8,5 @@ load: STARTUP
 commands:
   gamemode:
     aliases: [gm]
+  ban:
+  

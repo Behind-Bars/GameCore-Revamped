@@ -59,7 +59,12 @@ public class PlayerChats implements Listener {
 	public void chat(AsyncPlayerChatEvent event) {
 		Player player = event.getPlayer();
 		String message = event.getMessage();
-
+		
+		if(Main.getPlayerHandler(player).isMuted()) {
+			player.sendMessage("§c§lYou're muted!§r\n" + Main.getPlayerHandler(player).getMuteInfo().getReason());
+			event.setCancelled(true);
+		}
+		
 		if(Main.getPlayerHandler(player).getAcceptRules() == 0) {
 			event.getRecipients().remove(player);
 			event.setCancelled(true);

@@ -16,6 +16,7 @@ import java.util.UUID;
 
 import org.behindbars.gamecore.Main;
 import org.behindbars.gamecore.core.data.BanInfo;
+import org.behindbars.gamecore.core.data.MuteInfo;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -39,6 +40,8 @@ public class PlayerHandler {
 	public void sync(UUID uuid) {
 		player = Bukkit.getPlayer(uuid);
 	}
+	
+	// TODO: BAN
 	
 	public void banPlayer(String reason, long time, Player victimizer) {
 		BanInfo info = getLastBanInfo();
@@ -82,7 +85,7 @@ public class PlayerHandler {
 		deleteLastBan(info.getVictim());
 	}
 
-	private void deleteLastBan(UUID victim) {
+	public static void deleteLastBan(UUID victim) {
 		Connection con = Main.getDB().getConnection();
 		try {
 			PreparedStatement pstmt = con.prepareStatement("DELETE FROM bans WHERE Victim=?");
@@ -114,6 +117,22 @@ public class PlayerHandler {
 		return null;
 	}
 	
+	public static boolean isBanned(UUID player) {
+		Connection con = Main.getDB().getConnection();
+		try {
+			PreparedStatement pstmt = con.prepareStatement("SELECT BanTo FROM bans WHERE Victim=?;");
+			pstmt.setString(1, player.toString());
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				long bannedTo = rs.getLong("BanTo");
+				return bannedTo > System.currentTimeMillis() ? true : false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 	public boolean isBanned() {
 		Connection con = Main.getDB().getConnection();
 		try {
@@ -129,6 +148,117 @@ public class PlayerHandler {
 		}
 		return false;
 	}
+	
+	// BAN END
+	//TODO: MUTE
+	
+	public void mutePlayer(String reason, long time, Player victimizer) {
+		MuteInfo info = getMuteInfo();
+		if(info != null) {
+			if(info.getMutedTo() > System.currentTimeMillis()) {
+				victimizer.sendMessage("§4Already muted!");
+				return;
+			}else {
+				saveMuteToHistory(info);
+			}
+		}
+		Connection con = Main.getDB().getConnection();
+		try {
+			PreparedStatement pstmt = con.prepareStatement("INSERT INTO mutes (MutedFrom, MutedTo, Reason, Victimizer, Victim) VALUES (?, ?, ?, ?, ?);");
+			pstmt.setLong(1, System.currentTimeMillis());
+			pstmt.setLong(2, time);
+			pstmt.setString(3, reason);
+			pstmt.setString(4, victimizer.getUniqueId().toString());
+			pstmt.setString(5, player.getUniqueId().toString());
+			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void saveMuteToHistory(MuteInfo info) {
+		Connection con = Main.getDB().getConnection();
+		try {
+			PreparedStatement pstmt = con.prepareStatement("INSERT INTO mute_history (MutedFrom, MutedTo, Reason, Victimizer, Victim) VALUES (?, ?, ?, ?, ?);");
+			pstmt.setLong(1, info.getMutedFrom());
+			pstmt.setLong(2, info.getMutedTo());
+			pstmt.setString(3, info.getReason());
+			pstmt.setString(4, info.getVictimizer().toString());
+			pstmt.setString(5, info.getVictim().toString());
+			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		deleteLastBan(info.getVictim());
+	}
+
+	public static void deleteMute(UUID victim) {
+		Connection con = Main.getDB().getConnection();
+		try {
+			PreparedStatement pstmt = con.prepareStatement("DELETE FROM mutes WHERE Victim=?");
+			pstmt.setString(1, victim.toString());
+			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public MuteInfo getMuteInfo() {
+		Connection con = Main.getDB().getConnection();
+		try {
+			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM mutes WHERE Victim=?;");
+			pstmt.setString(1, player.getUniqueId().toString());
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				String reason = rs.getString("Reason");
+				UUID victim = UUID.fromString(rs.getString("Victim"));
+				UUID victimizer = UUID.fromString(rs.getString("Victimizer"));
+				long bannedFrom = rs.getLong("MutedFrom");
+				long bannedTo = rs.getLong("MutedTo");
+				return new MuteInfo(bannedFrom, bannedTo, victim, victimizer, reason);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public static boolean isMuted(UUID player) {
+		Connection con = Main.getDB().getConnection();
+		try {
+			PreparedStatement pstmt = con.prepareStatement("SELECT MutedTo FROM mutes WHERE Victim=?;");
+			pstmt.setString(1, player.toString());
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				long bannedTo = rs.getLong("MutedTo");
+				return bannedTo > System.currentTimeMillis() ? true : false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public boolean isMuted() {
+		Connection con = Main.getDB().getConnection();
+		try {
+			PreparedStatement pstmt = con.prepareStatement("SELECT MutedTo FROM mutes WHERE Victim=?;");
+			pstmt.setString(1, player.getUniqueId().toString());
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				long bannedTo = rs.getLong("MutedTo");
+				return bannedTo > System.currentTimeMillis() ? true : false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	// MUTE END
 	
 	public boolean isSetup() {
 		return config.contains("General");
