@@ -41,8 +41,10 @@ public class UnbanCMD extends Command {
 				player.sendMessage("§c" + args[0] + " hasn't played on this server.");
 			}else {
 				if(PlayerHandler.isBanned(target.getUniqueId())) {
-					PlayerHandler.deleteLastBan(target.getUniqueId());
-					player.sendMessage("§a" + target.getName() + " has been unbanned.");
+					PlayerHandler.deleteLastBan(target);
+					player.sendMessage("\n§8§m--------------------------------------"
+							+ "\n§6" + target.getName() + "§a has been unbanned."
+							+ "\n§8§m--------------------------------------\n");
 				}else {
 					player.sendMessage("§c" + target.getName() + " is not banned.");
 				}

@@ -7,6 +7,7 @@ Discord: XenoPyax#5647
 package org.behindbars.gamecore.core.events;
 
 import org.behindbars.gamecore.Main;
+import org.behindbars.gamecore.core.data.MuteInfo;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -16,6 +17,9 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
 import net.md_5.bungee.api.ChatColor;
 
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -61,7 +65,12 @@ public class PlayerChats implements Listener {
 		String message = event.getMessage();
 		
 		if(Main.getPlayerHandler(player).isMuted()) {
-			player.sendMessage("§c§lYou're muted!§r\n" + Main.getPlayerHandler(player).getMuteInfo().getReason());
+			MuteInfo info = Main.getPlayerHandler(player).getMuteInfo();
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+			player.sendMessage("\n§8§m--------------------------------------"
+					+ "\n§c§lYou're muted!§r"
+					+ "\n§7Reason: " + info.getReason() + "\n§7Muted until: §6" + sdf.format(new Date(info.getMutedTo()))
+					+ "\n§8§m--------------------------------------\n");
 			event.setCancelled(true);
 		}
 		

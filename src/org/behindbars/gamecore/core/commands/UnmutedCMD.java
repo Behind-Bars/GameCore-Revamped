@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.behindbars.gamecore.Main;
 import org.behindbars.gamecore.core.handlers.PlayerHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -34,16 +35,23 @@ public class UnmutedCMD extends Command {
 		Player player = (Player) sender;
 		
 		if(args.length == 1) {
-			OfflinePlayer target = Bukkit.getOfflinePlayer(args[0]);
-			if(target == null) {
-				player.sendMessage("§c" + args[0] + " hasn't played on this server.");
-			}else {
-				if(PlayerHandler.isMuted(target.getUniqueId())) {
-					PlayerHandler.deleteMute(target.getUniqueId());
-					player.sendMessage("§a" + target.getName() + " has been unmuted.");
-				}else {
-					player.sendMessage("§c" + target.getName() + " is not muted.");
-				}
+			Player target = Bukkit.getPlayer(args[0]);
+			OfflinePlayer otarget = Bukkit.getOfflinePlayer(args[0]);
+			if(target == null && otarget == null) {
+				player.sendMessage("§cPlayer is not online or have played on this server before.");
+			}else if(target != null) {
+				Main.getPlayerHandler(target).deleteMute();
+				player.sendMessage("\n§8§m--------------------------------------"
+						+ "\n§6" + target.getName() + "§a has been unmuted."
+						+ "\n§8§m--------------------------------------\n");
+				target.sendMessage("\n§8§m--------------------------------------"
+						+ "\n§aYou have been unmuted."
+						+ "\n§8§m--------------------------------------\n");
+			}else if(otarget != null) {
+				PlayerHandler.deleteMute(otarget);
+				player.sendMessage("\n§8§m--------------------------------------"
+						+ "\n§6" + otarget.getName() + "§a has been unmuted."
+						+ "\n§8§m--------------------------------------\n");
 			}
 		}
 		return true;

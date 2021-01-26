@@ -15,7 +15,9 @@ import java.util.concurrent.TimeUnit;
 
 import org.behindbars.gamecore.Main;
 import org.behindbars.gamecore.core.data.MuteInfo;
+import org.behindbars.gamecore.core.handlers.PlayerHandler;
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
@@ -47,8 +49,12 @@ public class MuteCMD extends Command {
 		
 		if(Main.getPlayerHandler(player).getRank() == 10) {
 			if(args[0].equalsIgnoreCase("get")) {
-				MuteInfo info = Main.getPlayerHandler(Bukkit.getPlayer(args[1])).getMuteInfo();
-				if(info != null) {
+				Player target = Bukkit.getPlayer(args[1]);
+				OfflinePlayer otarget = Bukkit.getOfflinePlayer(args[1]);
+				if(target == null && otarget == null) {
+					player.sendMessage("§cPlayer is not online or have played on this server before.");
+				}else if(target != null) {
+					MuteInfo info = Main.getPlayerHandler(target).getMuteInfo();
 					SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 					player.sendMessage("§7Status §l" + (info.getMutedTo() > System.currentTimeMillis() ? "§4MUTED" : "§aUNMUTED")
 							+ "\n§7Muted from: §6" + sdf.format(new Date(info.getMutedFrom())) 
@@ -56,16 +62,50 @@ public class MuteCMD extends Command {
 							+ "\n§7Reason: §6" + info.getReason()
 							+ "\n§7Vicitim: §6" + Bukkit.getPlayer(info.getVictim()).getName()
 							+ "\n§7Victimizer: §6" + Bukkit.getOfflinePlayer(info.getVictimizer()).getName());
-				}else {
-					player.sendMessage("§cNo Information to display");
+				}else if(otarget != null) {
+					MuteInfo info = PlayerHandler.getMuteInfo(otarget);
+					SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+					player.sendMessage("§7Status §l" + (info.getMutedTo() > System.currentTimeMillis() ? "§4MUTED" : "§aUNMUTED")
+							+ "\n§7Muted from: §6" + sdf.format(new Date(info.getMutedFrom())) 
+							+ "\n§7Muted To: §6" + sdf.format(new Date(info.getMutedTo()))
+							+ "\n§7Reason: §6" + info.getReason()
+							+ "\n§7Vicitim: §6" + Bukkit.getPlayer(info.getVictim()).getName()
+							+ "\n§7Victimizer: §6" + Bukkit.getOfflinePlayer(info.getVictimizer()).getName());
 				}
 			}
 		}
 			
 		if(Main.getPlayerHandler(player).getRank() == 10) {
 			if(args[0].equalsIgnoreCase("set")) {
-				Main.getPlayerHandler(Bukkit.getPlayer(args[1])).mutePlayer(ChatColor.translateAlternateColorCodes('&', String.join(" ", Arrays.copyOfRange(args, 3, args.length))),
-											getTime(args[2]), player);
+				Player target = Bukkit.getPlayer(args[1]);
+				OfflinePlayer otarget = Bukkit.getOfflinePlayer(args[1]);
+				if(target == null && otarget == null) {
+					player.sendMessage("§cPlayer is not online or have played on this server before.");
+				}else if(target != null) {
+					Main.getPlayerHandler(target).mutePlayer(ChatColor.translateAlternateColorCodes('&', String.join(" ", Arrays.copyOfRange(args, 3, args.length))),
+							getTime(args[2]), player);
+					SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+					player.sendMessage("\n§8§m--------------------------------------"
+							+ "\n§7Status §l§4MUTED"
+							+ "\n§7Muted from: §6" + sdf.format(new Date(System.currentTimeMillis())) 
+							+ "\n§7Muted To: §6" + sdf.format(new Date(getTime(args[2])))
+							+ "\n§7Reason: §6" + String.join(" ", Arrays.copyOfRange(args, 3, args.length))
+							+ "\n§7Vicitim: §6" + target.getName()
+							+ "\n§7Victimizer: §6" + player.getName()
+							+ "\n§8§m--------------------------------------\n");
+				}else if(otarget != null) {
+					PlayerHandler.mutePlayer(otarget, ChatColor.translateAlternateColorCodes('&', String.join(" ", Arrays.copyOfRange(args, 3, args.length))),
+							getTime(args[2]), player);
+					SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+					player.sendMessage("\n§8§m--------------------------------------"
+							+ "\n§7Status §l§4MUTED"
+							+ "\n§7Muted from: §6" + sdf.format(new Date(System.currentTimeMillis())) 
+							+ "\n§7Muted To: §6" + sdf.format(new Date(getTime(args[2])))
+							+ "\n§7Reason: §6" + String.join(" ", Arrays.copyOfRange(args, 3, args.length))
+							+ "\n§7Vicitim: §6" + otarget.getName()
+							+ "\n§7Victimizer: §6" + player.getName()
+							+ "\n§8§m--------------------------------------\n");
+				}
 			}
 		}
 		return true;
