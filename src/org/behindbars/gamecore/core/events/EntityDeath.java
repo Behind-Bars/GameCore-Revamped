@@ -20,6 +20,7 @@ public class EntityDeath implements Listener {
 
         if(event.getEntity() instanceof Player) {
             Main.getPlayerHandler((Player) event.getEntity()).setCombatLogTime(-1);
+            event.getEntity().setGlowing(false);
             return;
         }else if (event.getEntity() instanceof Monster) {
             Monster monsterEnt = (Monster) event.getEntity();

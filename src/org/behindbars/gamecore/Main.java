@@ -65,6 +65,11 @@ public class Main extends JavaPlugin {
 		redstoneLimit = new RedstoneLimit();
 		combatLog();
 	}
+	
+	@Override
+	public void onDisable() {
+		Bukkit.getOnlinePlayers().forEach((p) -> p.setGlowing(false));
+	}
 
 	public void combatLog() {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getInstance(), new Runnable() {
