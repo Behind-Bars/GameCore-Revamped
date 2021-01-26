@@ -23,7 +23,7 @@ public class PlayerRespawn implements Listener {
 	public void onRespawn(PlayerRespawnEvent event) {
 		Player player = event.getPlayer();
 		new WorldCreator("SMP").createWorld();
-		Location cspawn = new Location(Bukkit.getWorld("SMP"), 32525, 78, -15557);
+		Location cspawn = new Location(Bukkit.getWorld("SMP"), 32527.5, 75, -15558.5);
 
 		Location spawn = new Location(Bukkit.getWorld("world"), -0.5,125,-0.5);
 

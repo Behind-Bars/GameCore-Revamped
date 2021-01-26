@@ -9,12 +9,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class WildCMD extends Command {
+    private HashMap<String, Long> wildCooldowns = new HashMap<String, Long>();
 
     private static String name = "wild";
     private static String description = "Teleport to a random location";
@@ -34,6 +32,26 @@ public class WildCMD extends Command {
             player.sendMessage(org.bukkit.ChatColor.DARK_RED + "ERROR: " + org.bukkit.ChatColor.RED + "You can only run this command in the SMP world!");
             return true;
         }
+
+        Long time = System.currentTimeMillis();
+        try {
+            Long lastUse = this.wildCooldowns.get(player.getName());
+			/*if (lastUse + 2*1000 > time) {
+				player.sendMessage(ChatColor.GREEN + "Please wait 3 seconds to send your message again!!");
+				event.setCancelled(true);
+			}*/
+            if (lastUse + 5*60*1000 > time) {
+                player.sendMessage(net.md_5.bungee.api.ChatColor.GREEN + "You can only preform this command every five minutes!");
+                return true;
+            }
+        } catch (Exception ex) {
+        }
+        try {
+            wildCooldowns.remove(player.getName());
+        } catch (Exception ex) {
+        }
+        wildCooldowns.put(player.getName(), time);
+    
 
         player.sendMessage(org.bukkit.ChatColor.DARK_RED + "Wild: " + ChatColor.RED + "Teleporting to a random location!");
         Location loc = getRandomLoc(40000, -40000, 40000, -40000, player.getWorld());

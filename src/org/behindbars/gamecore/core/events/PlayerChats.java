@@ -16,13 +16,39 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
 import net.md_5.bungee.api.ChatColor;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class PlayerChats implements Listener {
-	
+	private HashMap<String, Long> cooldowns = new HashMap<String, Long>();
+
 	@EventHandler
 	public void onCmd(PlayerCommandPreprocessEvent e) {
+		Player player = e.getPlayer();
 		System.out.println(e.getMessage().split(" ")[0]);
 		if(e.getMessage().split(" ")[0].equalsIgnoreCase("/me")) e.setCancelled(true);
 		if(e.getMessage().split(" ")[0].equalsIgnoreCase("/minecraft:me")) e.setCancelled(true);
+
+		if(e.getMessage().startsWith("/msg") || e.getMessage().startsWith("/r") || e.getMessage().startsWith("tell")) {
+			Long time = System.currentTimeMillis();
+			try {
+				Long lastUse = this.cooldowns.get(player.getName());
+			/*if (lastUse + 2*1000 > time) {
+				player.sendMessage(ChatColor.GREEN + "Please wait 3 seconds to send your message again!!");
+				event.setCancelled(true);
+			}*/
+				if (lastUse + 1000 > time) {
+					player.sendMessage(ChatColor.GREEN + "Dont Spam!");
+					e.setCancelled(true);
+				}
+			} catch (Exception ex) {
+			}
+			try {
+				cooldowns.remove(player.getName());
+			} catch (Exception ex) {
+			}
+			cooldowns.put(player.getName(), time);
+		}
 	}
 
 	String guardChat = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_BLUE + "Guard Chat" + ChatColor.DARK_GRAY + "] ";
@@ -57,6 +83,29 @@ public class PlayerChats implements Listener {
 			}
 			return;
 		}
+
+		
+		Long time = System.currentTimeMillis();
+		try {
+			Long lastUse = this.cooldowns.get(player.getName());
+			/*if (lastUse + 2*1000 > time) {
+				player.sendMessage(ChatColor.GREEN + "Please wait 3 seconds to send your message again!!");
+				event.setCancelled(true);
+			}*/
+			if (lastUse + 1000 > time) {
+				player.sendMessage(ChatColor.GREEN + "Dont Spam!");
+				event.setCancelled(true);
+			}
+		} catch (Exception ex) {
+		}
+		try {
+			cooldowns.remove(player.getName());
+		} catch (Exception ex) {
+		}
+		cooldowns.put(player.getName(), time);
+
+
+			
 
 		if(player.getWorld().getName().equalsIgnoreCase("SMP")) {
 			if(Main.getPlayerHandler(player).getRank() < 8) {

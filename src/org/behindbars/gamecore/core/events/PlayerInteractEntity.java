@@ -27,6 +27,25 @@ public class PlayerInteractEntity implements Listener {
 	@EventHandler
 	public void playerInteractCrate(PlayerInteractEntityEvent event) {
 		Player player = event.getPlayer();
+
+		if(event.getRightClicked().isCustomNameVisible()) {
+
+			if (event.getRightClicked().getCustomName().contains("Kit Tools")) {
+				event.setCancelled(true);
+				player.chat("/kit tools");
+				return;
+			}
+
+			if (event.getRightClicked().getCustomName().contains("Wild TP")) {
+				event.setCancelled(true);
+				player.chat("/wild");
+				return;
+			}
+
+		}
+
+
+	/*	Player player = event.getPlayer();
 		System.out.println("ran");
 		if(event.getRightClicked().isCustomNameVisible()) {
 			if (event.getRightClicked().getCustomName().contains(event.getPlayer().getName() + "'s Pet")) {
@@ -76,7 +95,10 @@ public class PlayerInteractEntity implements Listener {
 				}
 			}
 		}
-		return;
+		return; */
+
+
+
 	}
 
 }

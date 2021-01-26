@@ -23,6 +23,7 @@ import org.behindbars.gamecore.economy.commands.MoneyCMD;
 import org.behindbars.gamecore.killstreak.KillstreakCMD;
 import org.behindbars.gamecore.pets.commands.PetCMD;
 import org.behindbars.gamecore.smp.EndCMD;
+import org.behindbars.gamecore.smp.SetupSMPCMD;
 import org.behindbars.gamecore.trails.commands.TrailsCMD;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -57,7 +58,7 @@ public class CommandHandler {
 				new ReferCMD(), new RulesCMD(), new ScoreboardToggle(), new StatsCMD(), new SuicideCMD(), new ContrabandCMD(), new JailCMD(), new UnjailCMD(), new BailCMD(),
 				new BanCMD(), new UnbanCMD(), new TempbanCMD(), new KickCMD(), new WarnCMD(), new DonationCMD(), new BuyCMD(), new DonationAdminCMD(),
 				new KillstreakCMD(), new WarpCMD(), new VoteCMD(), new VoteAdminCMD(), new KillstreakCMD(), new SellCMD(), new SpawnCMD(), new AdminCMD(), new TpaAcceptCMD(),
-				new WildCMD(), new NetherCMD(), new TpaCMD(), new EndCMD());
+				new WildCMD(), new NetherCMD(), new TpaCMD(), new EndCMD(), new SetupSMPCMD());
 	}
 	
 	private void registerOverrideCommands() {

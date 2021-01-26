@@ -30,7 +30,9 @@ public class PlayerJoin implements Listener {
 		if(Main.getHandlers().containsKey(player.getUniqueId())) Main.getHandlers().get(player.getUniqueId()).sync(player.getUniqueId());
 		if(Main.getPlayerHandler(player).isBanned())  player.kickPlayer("§7Reason: §6" + Main.getPlayerHandler(player).getLastBanInfo().getReason() + "\n§7Victimizer: §6" + Main.getPlayerHandler(player).getLastBanInfo().getVictimizer());
 		if(new WorldCreator("SMP").createWorld() != null) {
-			player.teleport(Bukkit.getWorld("SMP").getSpawnLocation());
+			if(!player.getWorld().getName().equals("SMP")) {
+				player.teleport(Bukkit.getWorld("SMP").getSpawnLocation());
+			}
 		}
 		player.addAttachment(Main.getInstance()).setPermission("worldedit.selection.pos", true);
 		if(!Main.getPlayerHandler(player).isSetup()) Main.getPlayerHandler(player).setupPlayer();
@@ -38,6 +40,18 @@ public class PlayerJoin implements Listener {
 		player.setPlayerListName(Main.getPlayerHandler(player).rankToString() + Main.getPlayerHandler(player).getNickname());
 		player.setWalkSpeed(0.2f);
 		player.setFlySpeed(0.1f);
+
+		player.sendMessage(ChatColor.DARK_RED + ChatColor.BOLD.toString() + "============ " + ChatColor.DARK_GRAY + "[ " + ChatColor.RED + ChatColor.BOLD + "Behind Bars" + ChatColor.DARK_GRAY + " ] " + ChatColor.DARK_RED + ChatColor.BOLD + "============");
+		player.sendMessage("");
+		player.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + ">> " + ChatColor.WHITE + ChatColor.ITALIC.toString() +"Remember to check /rules for updates!");
+		player.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + ">> " + ChatColor.GRAY + ChatColor.ITALIC.toString() +"Share the ip address too while your at it!");
+		player.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + ">> " + ChatColor.WHITE + ChatColor.ITALIC.toString() +"Type /help for help with commands!");
+		player.sendMessage("");
+		player.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + ">> " + ChatColor.GRAY + ChatColor.ITALIC.toString() + "IP: behind-bars.org");
+		player.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + ">> " + ChatColor.WHITE + ChatColor.ITALIC.toString() + "Discord: https://discord.gg/smN32dP4H9");
+		player.sendMessage("");
+
+
 
 
 		player.setGameMode(GameMode.SURVIVAL);
@@ -80,7 +94,7 @@ public class PlayerJoin implements Listener {
 		if(!player.hasPlayedBefore()) {
 			event.setJoinMessage(ChatColor.YELLOW + ChatColor.BOLD.toString() + "Welcome " + player.getName());
 
-			Location cspawn = new Location(Bukkit.getWorld("SMP"), 32525,78,-15557);
+			Location cspawn = new Location(Bukkit.getWorld("SMP"), 32527.5, 75, -15558.5);
 			//Location cspawn = new Location(Bukkit.getWorld("world"), -0.5,138,198.5);
 
 			player.teleport(cspawn);

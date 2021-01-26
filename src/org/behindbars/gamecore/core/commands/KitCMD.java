@@ -51,6 +51,9 @@ public class KitCMD extends Command {
 				Main.getPlayerHandler(player).setKitToolsDate();
 				player.getInventory().addItem(new ItemStack(Material.IRON_PICKAXE));
 				player.getInventory().addItem(new ItemStack(Material.IRON_AXE));
+				player.getInventory().addItem(new ItemStack(Material.BREAD, 16));
+
+
 			}
 
 		}else if(args[0].equalsIgnoreCase("food")) {

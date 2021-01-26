@@ -9,6 +9,7 @@ package org.behindbars.gamecore.core.events;
 import org.behindbars.gamecore.Main;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
@@ -17,7 +18,7 @@ import net.md_5.bungee.api.chat.TextComponent;
 
 public class EntityAttackEntity implements Listener {
 
-	@EventHandler
+	@EventHandler(priority = EventPriority.MONITOR)
 	public void playerAttack(EntityDamageByEntityEvent event) {
 		if(event.getEntity() instanceof Player && event.getDamager() instanceof Player) {
 			Player damaged = (Player) event.getEntity();
@@ -29,7 +30,10 @@ public class EntityAttackEntity implements Listener {
 				return;
 			}*/
 			
-			if(event.isCancelled()) return;
+			if(event.isCancelled()) {
+				event.setCancelled(true);
+				return;
+			}
 			
 			Main.getPlayerHandler(damaged).setCombatLogTime(10);
 			Main.getPlayerHandler(damager).setCombatLogTime(10);
